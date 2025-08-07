@@ -54,13 +54,26 @@ class Localize {
   static Localize? maybeOf(BuildContext context) {
     return Localizations.of<Localize>(context, Localize);
   }
+
+  /// `Error Loading Data`
+  String get apiErrorLoadingDataText {
+    return Intl.message(
+      'Error Loading Data',
+      name: 'apiErrorLoadingDataText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Localize> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
-    return const <Locale>[Locale.fromSubtags(languageCode: 'en')];
+    return const <Locale>[
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'de'),
+    ];
   }
 
   @override

@@ -1,1 +1,4 @@
-{}
+{
+  "@@locale": "en",
+  "apiErrorLoadingDataText": "Error Loading Data"
+}
