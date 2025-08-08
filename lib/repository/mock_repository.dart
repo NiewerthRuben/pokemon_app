@@ -6,27 +6,28 @@ import 'package:pokemon_app/repository/service_repository.dart';
 class MockRepository extends ServiceRepository {
   @override
   Future<PokemonDetailData?> getPokemonDetails(String pokemonName) {
-    final pokemonDetails =
-        PokemonDetailData(id: 1, name: "Fledermaus", sprites: null, types: null)
-            as Future<PokemonDetailData>;
-
-    return pokemonDetails;
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () => PokemonDetailData(
+        id: 1,
+        name: "Fledermaus",
+        sprites: null,
+        types: null,
+      ),
+    );
   }
 
   @override
-  Future<PokemonListResponseData?> getPokemonList(int offset, int limit) async {
-    final Future<PokemonListResponseData> pokemonList =
-        ([
-              PokemonListResponseData(
-                count: 2,
-                results: [
-                  PokemonItemData(name: "Fledermaus", url: "url1"),
-                  PokemonItemData(name: "Hund", url: "url2"),
-                ],
-              ),
-            ])
-            as Future<PokemonListResponseData>;
-
-    return pokemonList;
+  Future<PokemonListResponseData?> getPokemonList(int offset, int limit) {
+    return Future.delayed(
+      const Duration(seconds: 1),
+      () => PokemonListResponseData(
+        count: 2,
+        results: [
+          PokemonItemData(name: "Fledermaus", url: "url1"),
+          PokemonItemData(name: "Hund", url: "url2"),
+        ],
+      ),
+    );
   }
 }

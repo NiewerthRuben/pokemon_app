@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/repository/mock_repository.dart';
 import 'package:pokemon_app/screens/splash/cubit/splash_screen_cubit.dart';
@@ -11,12 +12,12 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainRepository = context.read<MainRepository>();
-    final mockRepository = context.read<MockRepository>();
+    final instancesRepository = context.read<InstancesRepository>();
     return BlocProvider(
       create: (context) => SplashScreenCubit(
         mainRepository: mainRepository,
-        mockRepository: mockRepository,
-      )..initial(),
+        instancesRepository: instancesRepository,
+      ),
       child: Scaffold(body: SplashScreenContent()),
     );
   }

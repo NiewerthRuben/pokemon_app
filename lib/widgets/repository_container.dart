@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/repository/mock_repository.dart';
 
@@ -12,7 +13,7 @@ class RepositoryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (context) => MockRepository()),
+        RepositoryProvider(create: (context) => InstancesRepository()),
         RepositoryProvider(create: (context) => MainRepository()),
       ],
       child: child,

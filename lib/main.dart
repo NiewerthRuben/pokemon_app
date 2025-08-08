@@ -6,3 +6,5 @@ import 'application.dart';
 void main() {
   runApp(RepositoryContainer(child: Application()));
 }
+
+// Zuerstmal den screen fertig machen mit ladebalken etc... KEINE LOGIK!
