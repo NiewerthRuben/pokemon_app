@@ -42,18 +42,30 @@ class _SplashScreenContentState extends State<SplashScreenContent> {
             SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 8,
-                borderRadius: BorderRadius.circular(12),
-                backgroundColor: Colors.grey.shade300,
-                color: Colors.redAccent,
+              child: BlocBuilder<SplashScreenCubit, SplashScreenState>(
+                builder: (context, state) {
+                  if (state is SplashScreenInitializing) {
+                    return Column(
+                      children: [
+                        LinearProgressIndicator(
+                          value: state.count,
+                          minHeight: 8,
+                          borderRadius: BorderRadius.circular(12),
+                          backgroundColor: Colors.grey.shade300,
+                          color: Colors.redAccent,
+                        ),
+                        SizedBox(height: 30),
+                        Text(
+                          '${(state.count * 100).toInt()}%',
+                          style: TextStyle(fontSize: 14, color: Colors.black),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return SizedBox.shrink();
+                  }
+                },
               ),
-            ),
-            SizedBox(height: 30),
-            Text(
-              '${(progress * 100).toInt()}%',
-              style: TextStyle(fontSize: 14, color: Colors.black),
             ),
             Spacer(flex: 3),
           ],

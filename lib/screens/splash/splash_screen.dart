@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/repository/mock_repository.dart';
+import 'package:pokemon_app/screens/home/home_screen.dart';
 import 'package:pokemon_app/screens/splash/cubit/splash_screen_cubit.dart';
 import 'package:pokemon_app/screens/splash/widget/splash_screen_content.dart';
 
@@ -18,7 +19,20 @@ class SplashScreen extends StatelessWidget {
         mainRepository: mainRepository,
         instancesRepository: instancesRepository,
       ),
-      child: Scaffold(body: SplashScreenContent()),
+      child: Builder(
+        builder: (context) {
+          return BlocListener<SplashScreenCubit, SplashScreenState>(
+            listener: (context, state) {
+              if (state is SplashScreenInitialized) {
+                Navigator.of(
+                  context,
+                ).pop(MaterialPageRoute(builder: (context) => HomeScreen()));
+              }
+            },
+            child: Scaffold(body: SplashScreenContent()),
+          );
+        },
+      ),
     );
   }
 }
