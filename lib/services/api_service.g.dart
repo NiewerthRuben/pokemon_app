@@ -20,15 +20,9 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<PokemonListResponseData> getPokemonList({
-    required int offset,
-    required int limit,
-  }) async {
+  Future<PokemonListResponseData> getPokemonList({required int limit}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'offset': offset,
-      r'limit': limit,
-    };
+    final queryParameters = <String, dynamic>{r'limit': limit};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<PokemonListResponseData>(
