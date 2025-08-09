@@ -15,10 +15,15 @@ class SplashScreenContent extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 200,
-            height: 200,
-            child: Image.asset('assets/images/splash.gif', fit: BoxFit.contain),
+          Center(
+            child: SizedBox(
+              width: 200,
+              height: 200,
+              child: Image.asset(
+                'assets/images/splash.gif',
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           SizedBox(height: 8),
           Text(
