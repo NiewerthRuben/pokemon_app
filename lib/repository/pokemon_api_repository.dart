@@ -15,7 +15,7 @@ class PokemonApiRepository extends ServiceRepository {
 
   @override
   Future<PokemonListResponseData?> getPokemonList(int limit) async {
-    apiService ??= ApiService.create(timeout: 10);
+    apiService ??= ApiService.create(timeoutSeconds: 10,);
     return await apiService!.getPokemonList(limit: limit);
   }
 }

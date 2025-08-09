@@ -29,7 +29,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/pokemon',
+            'pokemon',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -56,7 +56,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/pokemon/${name}',
+            'pokemon/${name}',
             queryParameters: queryParameters,
             data: _data,
           )
