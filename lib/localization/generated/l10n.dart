@@ -73,6 +73,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<Localize> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'de'),
+      Locale.fromSubtags(languageCode: 'es'),
     ];
   }
 

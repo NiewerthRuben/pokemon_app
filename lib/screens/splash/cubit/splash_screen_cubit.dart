@@ -25,7 +25,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
     if (pokemonList != null) {
       pokemonMaxListValue = pokemonList.results.length;
       for (PokemonItemData pokemon in pokemonList.results) {
-        await _getPokemonDetails(pokemon.name);
+        await _getPokemonDetails(pokemon.name!);
       }
     } else {
       pokemonMaxListValue = 0;
