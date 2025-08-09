@@ -3,6 +3,7 @@ import 'package:pokemon_app/repository/service_repository.dart';
 import 'package:pokemon_app/repository/mock_repository.dart';
 import '../../../data/pokemon_list_response_data.dart';
 import '../../../enums/pokemon_type_enum.dart';
+import '../../../localization/generated/l10n.dart';
 
 class HomeScreenContent extends StatelessWidget {
   const HomeScreenContent({super.key});
@@ -10,16 +11,15 @@ class HomeScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ServiceRepository repository = MockRepository();
+    final localize = Localize.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Pokémon Liste")),
+      appBar: AppBar(title: Text(localize.pokemonListText)),
       body: FutureBuilder<PokemonListResponseData?>(
         future: repository.getPokemonList(0, 20),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Fehler: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final pokemons = snapshot.data!.results;
 
@@ -81,7 +81,6 @@ class HomeScreenContent extends StatelessWidget {
               ),
             );
           } else {
-            // Wenn keine Daten vorhanden sind
             return const Center(child: Text('Keine Pokémon gefunden.'));
           }
         },

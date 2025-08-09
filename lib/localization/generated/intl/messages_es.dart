@@ -23,7 +23,11 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "apiErrorLoadingDataText": MessageLookupByLibrary.simpleMessage(
-      "Error Loading Data",
+      "Error al cargar los datos",
     ),
+    "loadingPokemonsText": MessageLookupByLibrary.simpleMessage(
+      "Cargando datos de Pokémon...",
+    ),
+    "pokemonListText": MessageLookupByLibrary.simpleMessage("Lista de Pokémon"),
   };
 }

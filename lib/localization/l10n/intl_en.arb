@@ -1,4 +1,6 @@
 {
   "@@locale": "en",
-  "apiErrorLoadingDataText": "Error Loading Data"
+  "apiErrorLoadingDataText": "Error Loading Data",
+  "pokemonListText": "Pokemon List",
+  "loadingPokemonsText": "Loading Pokemon Data..."
 }

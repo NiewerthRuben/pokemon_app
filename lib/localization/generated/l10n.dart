@@ -64,6 +64,26 @@ class Localize {
       args: [],
     );
   }
+
+  /// `Pokemon List`
+  String get pokemonListText {
+    return Intl.message(
+      'Pokemon List',
+      name: 'pokemonListText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading Pokemon Data...`
+  String get loadingPokemonsText {
+    return Intl.message(
+      'Loading Pokemon Data...',
+      name: 'loadingPokemonsText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Localize> {

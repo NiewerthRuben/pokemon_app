@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/screens/splash/cubit/splash_screen_cubit.dart';
 
+import '../../../localization/generated/l10n.dart';
+
 class SplashScreenContent extends StatefulWidget {
   const SplashScreenContent({super.key});
 
@@ -18,7 +20,7 @@ class _SplashScreenContentState extends State<SplashScreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    double? progress = 0.3;
+    final localize = Localize.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -36,7 +38,7 @@ class _SplashScreenContentState extends State<SplashScreenContent> {
             ),
             SizedBox(height: 8),
             Text(
-              'Lade Pokémon-Daten...',
+              localize.loadingPokemonsText,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 16),

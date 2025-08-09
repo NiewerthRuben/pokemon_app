@@ -25,5 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "apiErrorLoadingDataText": MessageLookupByLibrary.simpleMessage(
       "Fehler beim Laden der Daten",
     ),
+    "loadingPokemonsText": MessageLookupByLibrary.simpleMessage(
+      "Lade Pokémon-Daten...",
+    ),
+    "pokemonListText": MessageLookupByLibrary.simpleMessage("Pokemon Liste"),
   };
 }
