@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app/navigations/e_routes.dart';
 import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/repository/mock_repository.dart';
@@ -24,9 +25,7 @@ class SplashScreen extends StatelessWidget {
           return BlocListener<SplashScreenCubit, SplashScreenState>(
             listener: (context, state) {
               if (state is SplashScreenInitialized) {
-                Navigator.of(
-                  context,
-                ).pop(MaterialPageRoute(builder: (context) => HomeScreen()));
+                ERoute.HOME.pushReplacement(context);
               }
             },
             child: Scaffold(body: SplashScreenContent()),

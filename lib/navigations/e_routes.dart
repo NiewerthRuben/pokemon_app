@@ -1,27 +1,24 @@
-
 import 'package:flutter/material.dart';
-
+import 'package:pokemon_app/screens/home/home_screen.dart';
 
 import '../screens/splash/splash_screen.dart';
 
 enum ERoute {
   MAIN('/'),
   SPLASH('/splash_screen'),
-  HOME('/home_screen'),
-  DETAIL('/detail_screen');
+  HOME('/home_screen');
 
   final String route;
 
   const ERoute(this.route);
 
-  // Widget get screen {
-  //   return switch (this) {
-  //     ERoute.MAIN => const SplashScreen(),
-  //     ERoute.SPLASH => const SplashScreen(),
-  //     ERoute.HOME => const HomeScreen(),
-  //     ERoute.DETAIL => DetailScreen(),
-  //   };
-  // }
+  Widget get screen {
+    return switch (this) {
+      ERoute.MAIN => const SplashScreen(),
+      ERoute.SPLASH => const SplashScreen(),
+      ERoute.HOME => const HomeScreen(),
+    };
+  }
 
   Future<T?> push<T>(BuildContext context, {Object? arguments}) async {
     return Navigator.of(context).pushNamed(route, arguments: arguments);

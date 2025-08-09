@@ -1,3 +1,4 @@
 08082025
 UI Homescreen vorbereiten KEINE LOGIK !!!!!!
 Eroutes anlegen
+Localisazion einbauen
