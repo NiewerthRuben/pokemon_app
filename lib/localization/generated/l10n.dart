@@ -66,20 +66,20 @@ class Localize {
   }
 
   /// `Pokemon List`
-  String get pokemonListText {
+  String get homeScreenPokemonListText {
     return Intl.message(
       'Pokemon List',
-      name: 'pokemonListText',
+      name: 'homeScreenPokemonListText',
       desc: '',
       args: [],
     );
   }
 
   /// `Loading Pokemon Data...`
-  String get loadingPokemonsText {
+  String get splashScreenLoadingPokemonsText {
     return Intl.message(
       'Loading Pokemon Data...',
-      name: 'loadingPokemonsText',
+      name: 'splashScreenLoadingPokemonsText',
       desc: '',
       args: [],
     );

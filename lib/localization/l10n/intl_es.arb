@@ -1,6 +1,6 @@
 {
   "@@locale": "es",
   "apiErrorLoadingDataText": "Error al cargar los datos",
-  "pokemonListText": "Lista de Pokémon",
-  "loadingPokemonsText": "Cargando datos de Pokémon..."
+  "homeScreenPokemonListText": "Lista de Pokémon",
+  "splashScreenLoadingPokemonsText": "Cargando datos de Pokémon..."
 }

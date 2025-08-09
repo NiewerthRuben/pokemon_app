@@ -6,6 +6,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeScreenContent();
+    return PopScope(
+      canPop: false,
+      child: HomeScreenContent(),
+    ); // zurück klappt nicht mehr canPop = false
+
+    // canPop = false verhindert das zurück gehen (nochmal anschauen)
   }
 }

@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
       create: (context) => SplashScreenCubit(
         mainRepository: mainRepository,
         instancesRepository: instancesRepository,
-      ),
+      )..initializePokemon(),
       child: Builder(
         builder: (context) {
           return BlocListener<SplashScreenCubit, SplashScreenState>(

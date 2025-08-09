@@ -35,10 +35,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   }
 
   Future<PokemonListResponseData?> _getPokemonList() async {
-    final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
-      2,
-      3,
-    );
+    final pokemonList = await instancesRepository.serviceAPI.getPokemonList(50);
     return pokemonList;
   }
 
