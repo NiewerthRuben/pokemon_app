@@ -8,8 +8,8 @@ part of 'pokemon_item_data.dart';
 
 PokemonItemData _$PokemonItemDataFromJson(Map<String, dynamic> json) =>
     PokemonItemData(
-      name: json['name'] as String,
-      url: json['url'] as String,
+      name: json['name'] as String?,
+      url: json['url'] as String?,
       imageUrl: json['imageUrl'] as String?,
       firstType: json['firstType'] as String?,
       isFavorite: json['isFavorite'] as bool? ?? false,

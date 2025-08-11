@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/home_screen_pokemon_details_page.dart';
 import 'package:pokemon_app/screens/home/home_screen.dart';
 
 import '../screens/splash/splash_screen.dart';

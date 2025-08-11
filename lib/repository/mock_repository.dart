@@ -5,14 +5,15 @@ import 'package:pokemon_app/repository/service_repository.dart';
 
 class MockRepository extends ServiceRepository {
   @override
-  Future<PokemonDetailData?> getPokemonDetails(String pokemonName) {
+  Future<PokemonItemData?> getPokemonDetails(String pokemonName) {
     return Future.delayed(
       const Duration(seconds: 1),
-      () => PokemonDetailData(
-        id: 1,
+      () => PokemonItemData(
+        firstType: "grass",
         name: "Fledermaus",
-        sprites: null,
-        types: null,
+        isFavorite: true,
+        imageUrl: "beispielURL",
+        stats: [],
       ),
     );
   }

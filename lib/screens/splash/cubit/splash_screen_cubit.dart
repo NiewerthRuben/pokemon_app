@@ -42,11 +42,11 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   Future<void> _getPokemonDetails(String name) async {
     final result = await instancesRepository.serviceAPI.getPokemonDetails(name);
     if (result != null) {
-      mainRepository.pokemonWithDetails.add(result);
+      mainRepository.pokemonsWithDetails.add(result);
       emit(
         SplashScreenState.splashScreenInitializing(
           count:
-              (mainRepository.pokemonWithDetails.length.toDouble() /
+              (mainRepository.pokemonsWithDetails.length.toDouble() /
               pokemonMaxListValue),
         ),
       );

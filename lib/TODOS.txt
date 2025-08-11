@@ -9,3 +9,9 @@ textfeld für die suchfunktion ALLES UI! KEINE LOGIK!!!!!!
 Details Screen vorbereiten
 
 TabView (Homescreen) für favoriten(nur zusatz zuletzt) vorher alles andere pushen!
+
+11082025
+Liste von type nachschauen?
+Homescreen: DropDown feld für die typen
+textfeld für die suchfunktion ALLES UI! KEINE LOGIK!!!!!!
+Hintergrund bei details nach typ färben
