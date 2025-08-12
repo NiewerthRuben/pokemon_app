@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/home_screen_pokemon_details_page.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/home_screen_pokemon_list_page.dart';
-import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/widgets/home_screen_favorites_tab.dart';
-import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/widgets/home_screen_general_tab.dart';
-import '../../../data/pokemon_list_response_data.dart';
-import '../../../enums/pokemon_type_enum.dart';
 import '../../../localization/generated/l10n.dart';
-import '../../../navigations/e_routes.dart';
 
 class HomeScreenContent extends StatefulWidget {
   const HomeScreenContent({super.key});

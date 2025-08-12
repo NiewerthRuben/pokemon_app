@@ -18,7 +18,15 @@ class HomeScreen extends StatelessWidget {
             canPop: false,
             child: SafeArea(
               child: Scaffold(
-                appBar: AppBar(title: Text(localize.homeScreenPokemonListText)),
+                appBar: AppBar(
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/logo.png', height: 50),
+                    ],
+                  ),
+                ),
                 body: HomeScreenContent(),
               ),
             ),
