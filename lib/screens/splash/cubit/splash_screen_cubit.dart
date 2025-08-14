@@ -27,6 +27,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       for (PokemonItemData pokemon in pokemonList.results) {
         await _getPokemonDetails(pokemon.name!);
       }
+      mainRepository.getCategories();
     } else {
       pokemonMaxListValue = 0;
       emit(SplashScreenState.splashScreenFailed(errorMsg: "nüx"));

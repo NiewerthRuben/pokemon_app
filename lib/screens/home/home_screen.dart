@@ -19,13 +19,8 @@ class HomeScreen extends StatelessWidget {
             child: SafeArea(
               child: Scaffold(
                 appBar: AppBar(
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/logo.png', height: 50),
-                    ],
-                  ),
+                  centerTitle: true,
+                  title: Image.asset('assets/images/logo.png', height: 50),
                 ),
                 body: HomeScreenContent(),
               ),

@@ -4,6 +4,7 @@ import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/home_screen_pokemon_details_page.dart';
+import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/home_screen_pokemon_list_page.dart';
 import '../../../localization/generated/l10n.dart';
 
@@ -58,7 +59,16 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
       child: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: [HomeScreenPokemonListPage(), HomeScreenPokemonDetailsPage()],
+        children: [
+          BlocProvider<PokemonListCubit>(
+            //TODO: Position des blocproviders nochmal überdenken
+            create: (context) =>
+                PokemonListCubit(mainRepository: mainRepository)
+                  ..initialPokemonList(),
+            child: HomeScreenPokemonListPage(),
+          ),
+          HomeScreenPokemonDetailsPage(),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_app/data/pokemon_item_data.dart';
+import 'package:pokemon_app/enums/pokemon_type_enum.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
@@ -11,11 +12,14 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pokemon = context.read<MainRepository>().selectedPokemon;
+    final pokemonType = pokemon.firstType;
+    final backgroundColor = PokemonTypeEnum.fromString(pokemonType).color;
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         context.read<HomeScreenCubit>().goToListPage();
       },
       child: Container(
+        color: backgroundColor,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
