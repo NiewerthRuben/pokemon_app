@@ -22,9 +22,7 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       mainRepository.pokemonsWithDetails,
     );
     pokemonRepository.favoritesPokemonList = List.of(
-      mainRepository.pokemonsWithDetails
-          .where((e) => e.firstType == "grass")
-          .toList(),
+      mainRepository.pokemonsWithDetails.where((e) => e.isFavorite).toList(),
     );
     emit(
       PokemonListState.pokemonListInitialized(

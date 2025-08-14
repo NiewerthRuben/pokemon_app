@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
+import 'package:pokemon_app/screens/home/cubit/favorites_cubit.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/home_screen_pokemon_details_page.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/cubit/pokemon_list_cubit.dart';
@@ -56,20 +57,27 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           );
         }
       },
-      child: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: [
-          BlocProvider<PokemonListCubit>(
-            //TODO: Position des blocproviders nochmal überdenken
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
             create: (context) => PokemonListCubit(
               mainRepository: mainRepository,
               pokemonRepository: pokemonRepository,
             )..initialPokemonList(),
-            child: HomeScreenPokemonListPage(),
           ),
-          HomeScreenPokemonDetailsPage(),
+          BlocProvider(
+            create: (context) =>
+                FavoritesCubit(pokemonRepository: pokemonRepository),
+          ),
         ],
+        child: PageView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: [
+            HomeScreenPokemonListPage(),
+            HomeScreenPokemonDetailsPage(),
+          ],
+        ),
       ),
     );
   }

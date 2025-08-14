@@ -16,11 +16,10 @@ Homescreen: DropDown feld für die typen
 
 12082025
 Hintergrund bei details nach typ färben-
-textfeld für die suchfunktion dekorieren/stylen!!!!!!
 Dialog für kategorien dekorieren/stylen
 UI element fürs markieren als favorit hinzufügen Longpress?
 
 14082025
 Design for the tab bars general and favorites
-
-,
+textfeld für die suchfunktion dekorieren/stylen!!!!!!
+Design icon for categories

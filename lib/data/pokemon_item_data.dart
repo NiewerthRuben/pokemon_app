@@ -9,7 +9,7 @@ class PokemonItemData {
   final String? url;
   final String? imageUrl;
   final String? firstType;
-  final bool isFavorite;
+  bool isFavorite;
   final List<PokemonStatData>? stats;
 
   PokemonItemData({
