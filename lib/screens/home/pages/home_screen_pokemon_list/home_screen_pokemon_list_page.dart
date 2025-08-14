@@ -15,10 +15,7 @@ class HomeScreenPokemonListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<PokemonItemData> favoritePokemons = [];
-    List<PokemonItemData> generalPokemons = [];
-    final mainRepository = context.read<MainRepository>();
-    String searchPattern = "";
+    final pokemonListCubit = context.read<PokemonListCubit>();
     return Column(
       children: [
         Padding(
@@ -28,7 +25,7 @@ class HomeScreenPokemonListPage extends StatelessWidget {
               Expanded(
                 child: HomeScreenPokemonTextField(
                   onChanged: (p0) {
-                    searchPattern = p0;
+                    //searchPattern = p0;
                   },
                 ),
               ),
@@ -39,6 +36,9 @@ class HomeScreenPokemonListPage extends StatelessWidget {
                     context: context,
                     builder: (context) => PokemonCategoryDialog(),
                   );
+                  if (result != null) {
+                    pokemonListCubit.getPokemonListByCategory(result);
+                  }
                 },
                 icon: Icon(Icons.category),
               ),
@@ -53,17 +53,16 @@ class HomeScreenPokemonListPage extends StatelessWidget {
                 if (state is PokemonListError) {
                   return Center(child: Text(state.errorMsg));
                 }
-
                 if (state is PokemonListInitialized) {
-                  generalPokemons = state.pokemonList;
-                  favoritePokemons = state.favoriteList;
                   return Column(
                     children: [
                       Expanded(
                         child: TabBarView(
                           children: [
-                            HomeScreenGeneralTab(pokemons: generalPokemons),
-                            HomeScreenFavoritesTab(favorites: favoritePokemons),
+                            HomeScreenGeneralTab(pokemons: state.pokemonList),
+                            HomeScreenFavoritesTab(
+                              favorites: state.favoriteList,
+                            ),
                           ],
                         ),
                       ),

@@ -33,4 +33,26 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       ),
     );
   }
+
+  Future<void> getPokemonListByCategory(String category) async {
+    if (category == "all") {
+      emit(
+        PokemonListState.pokemonListInitialized(
+          pokemonList: pokemonRepository.generalPokemonList,
+          favoriteList: pokemonRepository.favoritesPokemonList,
+        ),
+      );
+      return;
+    }
+
+    final pokemonListByCategory = pokemonRepository.generalPokemonList
+        .where((e) => e.firstType == category)
+        .toList();
+    emit(
+      PokemonListState.pokemonListInitialized(
+        pokemonList: pokemonListByCategory,
+        favoriteList: pokemonRepository.favoritesPokemonList,
+      ),
+    );
+  }
 }

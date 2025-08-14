@@ -16,5 +16,7 @@ class MainRepository {
             .toSet()
             .toList()
           ..sort();
+
+    pokemonCategories.insert(0, "all");
   }
 }
