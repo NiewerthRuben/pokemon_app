@@ -21,6 +21,7 @@ class _HomeScreenPokemonTextFieldState
       decoration: InputDecoration(
         hint: Text("Suchen..."),
         label: Text("Suche nach Namen"),
+        fillColor: Colors.red,
       ),
       onChanged: (value) => widget.onChanged(value),
     );

@@ -55,29 +55,8 @@ class HomeScreenPokemonListPage extends StatelessWidget {
                 }
 
                 if (state is PokemonListInitialized) {
-                  generalPokemons = state.pokemons;
-                  favoritePokemons = generalPokemons
-                      .where((element) => element.isFavorite)
-                      .toList();
-                  return Column(
-                    children: [
-                      Expanded(
-                        child: TabBarView(
-                          children: [
-                            HomeScreenGeneralTab(pokemons: generalPokemons),
-                            HomeScreenFavoritesTab(favorites: favoritePokemons),
-                          ],
-                        ),
-                      ),
-                      TabBar(tabs: [Text("General"), Text("Favorites")]),
-                    ],
-                  );
-                }
-                if (state is PokemonListFiltered) {
-                  generalPokemons = state.pokemons;
-                  favoritePokemons = generalPokemons
-                      .where((element) => element.isFavorite)
-                      .toList();
+                  generalPokemons = state.pokemonList;
+                  favoritePokemons = state.favoriteList;
                   return Column(
                     children: [
                       Expanded(

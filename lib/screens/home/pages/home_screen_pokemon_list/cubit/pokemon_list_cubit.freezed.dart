@@ -55,13 +55,13 @@ extension PokemonListStatePatterns on PokemonListState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PokemonListInitial value)?  pokemonListInitial,TResult Function( PokemonListInitialized value)?  pokemonListInitialized,TResult Function( PokemonListFiltered value)?  pokemonListFiltered,TResult Function( PokemonListError value)?  pokemonListError,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PokemonListInitial value)?  pokemonListInitial,TResult Function( PokemonListInitialized value)?  pokemonListInitialized,TResult Function( PokemonListChanging value)?  pokemonListChanging,TResult Function( PokemonListError value)?  pokemonListError,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case PokemonListInitial() when pokemonListInitial != null:
 return pokemonListInitial(_that);case PokemonListInitialized() when pokemonListInitialized != null:
-return pokemonListInitialized(_that);case PokemonListFiltered() when pokemonListFiltered != null:
-return pokemonListFiltered(_that);case PokemonListError() when pokemonListError != null:
+return pokemonListInitialized(_that);case PokemonListChanging() when pokemonListChanging != null:
+return pokemonListChanging(_that);case PokemonListError() when pokemonListError != null:
 return pokemonListError(_that);case _:
   return orElse();
 
@@ -80,13 +80,13 @@ return pokemonListError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PokemonListInitial value)  pokemonListInitial,required TResult Function( PokemonListInitialized value)  pokemonListInitialized,required TResult Function( PokemonListFiltered value)  pokemonListFiltered,required TResult Function( PokemonListError value)  pokemonListError,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PokemonListInitial value)  pokemonListInitial,required TResult Function( PokemonListInitialized value)  pokemonListInitialized,required TResult Function( PokemonListChanging value)  pokemonListChanging,required TResult Function( PokemonListError value)  pokemonListError,}){
 final _that = this;
 switch (_that) {
 case PokemonListInitial():
 return pokemonListInitial(_that);case PokemonListInitialized():
-return pokemonListInitialized(_that);case PokemonListFiltered():
-return pokemonListFiltered(_that);case PokemonListError():
+return pokemonListInitialized(_that);case PokemonListChanging():
+return pokemonListChanging(_that);case PokemonListError():
 return pokemonListError(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -104,13 +104,13 @@ return pokemonListError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PokemonListInitial value)?  pokemonListInitial,TResult? Function( PokemonListInitialized value)?  pokemonListInitialized,TResult? Function( PokemonListFiltered value)?  pokemonListFiltered,TResult? Function( PokemonListError value)?  pokemonListError,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PokemonListInitial value)?  pokemonListInitial,TResult? Function( PokemonListInitialized value)?  pokemonListInitialized,TResult? Function( PokemonListChanging value)?  pokemonListChanging,TResult? Function( PokemonListError value)?  pokemonListError,}){
 final _that = this;
 switch (_that) {
 case PokemonListInitial() when pokemonListInitial != null:
 return pokemonListInitial(_that);case PokemonListInitialized() when pokemonListInitialized != null:
-return pokemonListInitialized(_that);case PokemonListFiltered() when pokemonListFiltered != null:
-return pokemonListFiltered(_that);case PokemonListError() when pokemonListError != null:
+return pokemonListInitialized(_that);case PokemonListChanging() when pokemonListChanging != null:
+return pokemonListChanging(_that);case PokemonListError() when pokemonListError != null:
 return pokemonListError(_that);case _:
   return null;
 
@@ -128,12 +128,12 @@ return pokemonListError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pokemonListInitial,TResult Function( List<PokemonItemData> pokemons)?  pokemonListInitialized,TResult Function( List<PokemonItemData> pokemons)?  pokemonListFiltered,TResult Function( String errorMsg)?  pokemonListError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pokemonListInitial,TResult Function( List<PokemonItemData> pokemonList,  List<PokemonItemData> favoriteList)?  pokemonListInitialized,TResult Function()?  pokemonListChanging,TResult Function( String errorMsg)?  pokemonListError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case PokemonListInitial() when pokemonListInitial != null:
 return pokemonListInitial();case PokemonListInitialized() when pokemonListInitialized != null:
-return pokemonListInitialized(_that.pokemons);case PokemonListFiltered() when pokemonListFiltered != null:
-return pokemonListFiltered(_that.pokemons);case PokemonListError() when pokemonListError != null:
+return pokemonListInitialized(_that.pokemonList,_that.favoriteList);case PokemonListChanging() when pokemonListChanging != null:
+return pokemonListChanging();case PokemonListError() when pokemonListError != null:
 return pokemonListError(_that.errorMsg);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return pokemonListError(_that.errorMsg);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pokemonListInitial,required TResult Function( List<PokemonItemData> pokemons)  pokemonListInitialized,required TResult Function( List<PokemonItemData> pokemons)  pokemonListFiltered,required TResult Function( String errorMsg)  pokemonListError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pokemonListInitial,required TResult Function( List<PokemonItemData> pokemonList,  List<PokemonItemData> favoriteList)  pokemonListInitialized,required TResult Function()  pokemonListChanging,required TResult Function( String errorMsg)  pokemonListError,}) {final _that = this;
 switch (_that) {
 case PokemonListInitial():
 return pokemonListInitial();case PokemonListInitialized():
-return pokemonListInitialized(_that.pokemons);case PokemonListFiltered():
-return pokemonListFiltered(_that.pokemons);case PokemonListError():
+return pokemonListInitialized(_that.pokemonList,_that.favoriteList);case PokemonListChanging():
+return pokemonListChanging();case PokemonListError():
 return pokemonListError(_that.errorMsg);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return pokemonListError(_that.errorMsg);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pokemonListInitial,TResult? Function( List<PokemonItemData> pokemons)?  pokemonListInitialized,TResult? Function( List<PokemonItemData> pokemons)?  pokemonListFiltered,TResult? Function( String errorMsg)?  pokemonListError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pokemonListInitial,TResult? Function( List<PokemonItemData> pokemonList,  List<PokemonItemData> favoriteList)?  pokemonListInitialized,TResult? Function()?  pokemonListChanging,TResult? Function( String errorMsg)?  pokemonListError,}) {final _that = this;
 switch (_that) {
 case PokemonListInitial() when pokemonListInitial != null:
 return pokemonListInitial();case PokemonListInitialized() when pokemonListInitialized != null:
-return pokemonListInitialized(_that.pokemons);case PokemonListFiltered() when pokemonListFiltered != null:
-return pokemonListFiltered(_that.pokemons);case PokemonListError() when pokemonListError != null:
+return pokemonListInitialized(_that.pokemonList,_that.favoriteList);case PokemonListChanging() when pokemonListChanging != null:
+return pokemonListChanging();case PokemonListError() when pokemonListError != null:
 return pokemonListError(_that.errorMsg);case _:
   return null;
 
@@ -225,14 +225,21 @@ String toString() {
 
 
 class PokemonListInitialized implements PokemonListState {
-  const PokemonListInitialized({required final  List<PokemonItemData> pokemons}): _pokemons = pokemons;
+  const PokemonListInitialized({required final  List<PokemonItemData> pokemonList, required final  List<PokemonItemData> favoriteList}): _pokemonList = pokemonList,_favoriteList = favoriteList;
   
 
- final  List<PokemonItemData> _pokemons;
- List<PokemonItemData> get pokemons {
-  if (_pokemons is EqualUnmodifiableListView) return _pokemons;
+ final  List<PokemonItemData> _pokemonList;
+ List<PokemonItemData> get pokemonList {
+  if (_pokemonList is EqualUnmodifiableListView) return _pokemonList;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_pokemons);
+  return EqualUnmodifiableListView(_pokemonList);
+}
+
+ final  List<PokemonItemData> _favoriteList;
+ List<PokemonItemData> get favoriteList {
+  if (_favoriteList is EqualUnmodifiableListView) return _favoriteList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_favoriteList);
 }
 
 
@@ -246,16 +253,16 @@ $PokemonListInitializedCopyWith<PokemonListInitialized> get copyWith => _$Pokemo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListInitialized&&const DeepCollectionEquality().equals(other._pokemons, _pokemons));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListInitialized&&const DeepCollectionEquality().equals(other._pokemonList, _pokemonList)&&const DeepCollectionEquality().equals(other._favoriteList, _favoriteList));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_pokemons));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_pokemonList),const DeepCollectionEquality().hash(_favoriteList));
 
 @override
 String toString() {
-  return 'PokemonListState.pokemonListInitialized(pokemons: $pokemons)';
+  return 'PokemonListState.pokemonListInitialized(pokemonList: $pokemonList, favoriteList: $favoriteList)';
 }
 
 
@@ -266,7 +273,7 @@ abstract mixin class $PokemonListInitializedCopyWith<$Res> implements $PokemonLi
   factory $PokemonListInitializedCopyWith(PokemonListInitialized value, $Res Function(PokemonListInitialized) _then) = _$PokemonListInitializedCopyWithImpl;
 @useResult
 $Res call({
- List<PokemonItemData> pokemons
+ List<PokemonItemData> pokemonList, List<PokemonItemData> favoriteList
 });
 
 
@@ -283,9 +290,10 @@ class _$PokemonListInitializedCopyWithImpl<$Res>
 
 /// Create a copy of PokemonListState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? pokemons = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? pokemonList = null,Object? favoriteList = null,}) {
   return _then(PokemonListInitialized(
-pokemons: null == pokemons ? _self._pokemons : pokemons // ignore: cast_nullable_to_non_nullable
+pokemonList: null == pokemonList ? _self._pokemonList : pokemonList // ignore: cast_nullable_to_non_nullable
+as List<PokemonItemData>,favoriteList: null == favoriteList ? _self._favoriteList : favoriteList // ignore: cast_nullable_to_non_nullable
 as List<PokemonItemData>,
   ));
 }
@@ -296,74 +304,34 @@ as List<PokemonItemData>,
 /// @nodoc
 
 
-class PokemonListFiltered implements PokemonListState {
-  const PokemonListFiltered({required final  List<PokemonItemData> pokemons}): _pokemons = pokemons;
+class PokemonListChanging implements PokemonListState {
+  const PokemonListChanging();
   
 
- final  List<PokemonItemData> _pokemons;
- List<PokemonItemData> get pokemons {
-  if (_pokemons is EqualUnmodifiableListView) return _pokemons;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_pokemons);
-}
 
 
-/// Create a copy of PokemonListState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$PokemonListFilteredCopyWith<PokemonListFiltered> get copyWith => _$PokemonListFilteredCopyWithImpl<PokemonListFiltered>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListFiltered&&const DeepCollectionEquality().equals(other._pokemons, _pokemons));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PokemonListChanging);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_pokemons));
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'PokemonListState.pokemonListFiltered(pokemons: $pokemons)';
+  return 'PokemonListState.pokemonListChanging()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class $PokemonListFilteredCopyWith<$Res> implements $PokemonListStateCopyWith<$Res> {
-  factory $PokemonListFilteredCopyWith(PokemonListFiltered value, $Res Function(PokemonListFiltered) _then) = _$PokemonListFilteredCopyWithImpl;
-@useResult
-$Res call({
- List<PokemonItemData> pokemons
-});
 
 
-
-
-}
-/// @nodoc
-class _$PokemonListFilteredCopyWithImpl<$Res>
-    implements $PokemonListFilteredCopyWith<$Res> {
-  _$PokemonListFilteredCopyWithImpl(this._self, this._then);
-
-  final PokemonListFiltered _self;
-  final $Res Function(PokemonListFiltered) _then;
-
-/// Create a copy of PokemonListState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? pokemons = null,}) {
-  return _then(PokemonListFiltered(
-pokemons: null == pokemons ? _self._pokemons : pokemons // ignore: cast_nullable_to_non_nullable
-as List<PokemonItemData>,
-  ));
-}
-
-
-}
 
 /// @nodoc
 

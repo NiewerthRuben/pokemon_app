@@ -6,6 +6,7 @@ import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/home_screen_pokemon_details_page.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/cubit/pokemon_list_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_list/home_screen_pokemon_list_page.dart';
+import 'package:pokemon_app/screens/home/repositories/pokemon_repository.dart';
 import '../../../localization/generated/l10n.dart';
 
 class HomeScreenContent extends StatefulWidget {
@@ -28,8 +29,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    final instancesRepository = context
-        .read<InstancesRepository>(); // TODO: remove later only for testing!
+    final pokemonRepository = context.read<PokemonRepository>();
     final localize = Localize.of(context);
     final mainRepository = context.read<MainRepository>();
     return BlocListener<HomeScreenCubit, HomeScreenState>(
@@ -62,9 +62,10 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
         children: [
           BlocProvider<PokemonListCubit>(
             //TODO: Position des blocproviders nochmal überdenken
-            create: (context) =>
-                PokemonListCubit(mainRepository: mainRepository)
-                  ..initialPokemonList(),
+            create: (context) => PokemonListCubit(
+              mainRepository: mainRepository,
+              pokemonRepository: pokemonRepository,
+            )..initialPokemonList(),
             child: HomeScreenPokemonListPage(),
           ),
           HomeScreenPokemonDetailsPage(),
