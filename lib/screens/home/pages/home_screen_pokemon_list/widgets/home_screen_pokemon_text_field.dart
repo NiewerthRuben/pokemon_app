@@ -18,6 +18,7 @@ class _HomeScreenPokemonTextFieldState
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
       decoration: InputDecoration(
         hint: Text("Suchen..."),
         label: Text("Suche nach Namen"),

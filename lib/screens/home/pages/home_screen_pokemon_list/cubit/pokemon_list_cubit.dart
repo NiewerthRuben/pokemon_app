@@ -17,6 +17,8 @@ class PokemonListCubit extends Cubit<PokemonListState> {
     required this.pokemonRepository,
   }) : super(const PokemonListState.pokemonListInitial());
 
+  String searchPattern = "";
+
   Future<void> initialPokemonList() async {
     pokemonRepository.generalPokemonList = List.of(
       mainRepository.pokemonsWithDetails,
@@ -50,6 +52,41 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       PokemonListState.pokemonListInitialized(
         pokemonList: pokemonListByCategory,
         favoriteList: pokemonRepository.favoritesPokemonList,
+      ),
+    );
+  }
+
+  Future<void> getPokemonListBySearch(String name) async {
+    searchPattern = name;
+    if (searchPattern.isEmpty) {
+      emit(
+        PokemonListState.pokemonListInitialized(
+          pokemonList: pokemonRepository.generalPokemonList,
+          favoriteList: pokemonRepository.favoritesPokemonList,
+        ),
+      );
+      return;
+    }
+    List<PokemonItemData> generalPokemonListBySearch = [];
+    List<PokemonItemData> favoritesPokemonListBySearch = [];
+
+    for (final pokemon in pokemonRepository.generalPokemonList) {
+      if (pokemon.name != null &&
+          pokemon.name!.toLowerCase().contains(name.toLowerCase())) {
+        generalPokemonListBySearch.add(pokemon);
+      }
+    }
+    for (final pokemon in pokemonRepository.favoritesPokemonList) {
+      if (pokemon.name != null &&
+          pokemon.name!.toLowerCase().contains(name.toLowerCase())) {
+        favoritesPokemonListBySearch.add(pokemon);
+      }
+    }
+
+    emit(
+      PokemonListState.pokemonListInitialized(
+        pokemonList: generalPokemonListBySearch,
+        favoriteList: favoritesPokemonListBySearch,
       ),
     );
   }

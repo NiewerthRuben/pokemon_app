@@ -25,7 +25,7 @@ class HomeScreenPokemonListPage extends StatelessWidget {
               Expanded(
                 child: HomeScreenPokemonTextField(
                   onChanged: (p0) {
-                    //searchPattern = p0;
+                    pokemonListCubit.getPokemonListBySearch(p0);
                   },
                 ),
               ),
@@ -40,7 +40,19 @@ class HomeScreenPokemonListPage extends StatelessWidget {
                     pokemonListCubit.getPokemonListByCategory(result);
                   }
                 },
-                icon: Icon(Icons.category),
+                icon: Icon(
+                  Icons.category_outlined,
+                  color: Colors.orange,
+                  size: 30,
+                ),
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -66,7 +78,40 @@ class HomeScreenPokemonListPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      TabBar(tabs: [Text("General"), Text("Favorites")]),
+                      TabBar(
+                        tabs: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text("General"),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.red, width: 2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text("Favorites"),
+                          ),
+                        ],
+                        indicatorColor: Colors.transparent,
+                        labelColor: Colors.blue,
+                        unselectedLabelColor: Colors.red,
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        unselectedLabelStyle: const TextStyle(fontSize: 14),
+                      ),
                     ],
                   );
                 } else {
