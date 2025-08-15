@@ -26,54 +26,85 @@ class GridViewItem extends StatelessWidget {
             context.read<HomeScreenCubit>().goToDetailsPage();
           },
           child: Container(
+            padding: pokemon.isFavorite ? EdgeInsets.all(4) : null,
             decoration: BoxDecoration(
-              color: backgroundColor,
               borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  blurRadius: 5,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 3),
-                ),
-              ],
+              gradient: SweepGradient(
+                colors: [
+                  Colors.brown[200]!,
+                  Colors.redAccent,
+                  Colors.blueAccent,
+                  Colors.amber,
+                  Colors.green,
+                  Colors.cyanAccent,
+                  Colors.orange,
+                  Colors.deepPurpleAccent,
+                  Colors.brown,
+                  Colors.lightBlueAccent,
+                  Colors.pinkAccent,
+                  Colors.lightGreen,
+                  Colors.grey,
+                  Colors.indigo,
+                  Colors.indigoAccent,
+                  Colors.black54,
+                  Colors.blueGrey,
+                  Colors.pink,
+                  Colors.grey.shade300,
+                ],
+              ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                pokemon.imageUrl != null
-                    ? Image.network(
-                        pokemon.imageUrl!,
-                        height: 150,
-                        fit: BoxFit.contain,
-                      )
-                    : Icon(Icons.close),
-                IconButton(
-                  icon: Icon(
-                    pokemon.isFavorite ? Icons.star : Icons.star_border,
-                    color: pokemon.isFavorite ? Colors.yellow : Colors.black,
+            child: Container(
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    blurRadius: 5,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 3),
                   ),
-                  onPressed: () {
-                    pokemon.isFavorite = !pokemon.isFavorite;
-                    favoritesCubit.changePokemonFavoriteList(pokemon);
-                  },
-                ),
-                Text(
-                  // Niemals ausrufezeichen ohne if abfrage = null checken
-                  pokemon.name != null
-                      ? pokemon.name!.capitalize()
-                      : "Nix Name",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  pokemon.imageUrl != null
+                      ? Expanded(
+                          child: Image.network(
+                            pokemon.imageUrl!,
+                            fit: BoxFit.fill,
+                          ),
+                        )
+                      : Icon(Icons.close),
+                  IconButton(
+                    icon: Icon(
+                      pokemon.isFavorite ? Icons.star : Icons.star_border,
+                      color: pokemon.isFavorite ? Colors.yellow : Colors.black,
+                    ),
+                    onPressed: () {
+                      pokemon.isFavorite = !pokemon.isFavorite;
+                      favoritesCubit.changePokemonFavoriteList(pokemon);
+                    },
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  "Typ: ${pokemon.firstType?.capitalize()}",
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ],
+                  Text(
+                    // Niemals ausrufezeichen ohne if abfrage = null checken
+                    pokemon.name != null
+                        ? pokemon.name!.capitalize()
+                        : "Nix Name",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Typ: ${pokemon.firstType?.capitalize()}",
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         );
