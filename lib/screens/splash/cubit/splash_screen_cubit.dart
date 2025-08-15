@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pokemon_app/data/pokemon_list_response_data.dart';
 import 'package:pokemon_app/repository/instances_repository.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
+import 'package:pokemon_app/repository/preferences_repository.dart';
 import '../../../data/pokemon_item_data.dart';
 
 part 'splash_screen_state.dart';
@@ -12,10 +15,12 @@ part 'splash_screen_cubit.freezed.dart';
 class SplashScreenCubit extends Cubit<SplashScreenState> {
   final MainRepository mainRepository;
   final InstancesRepository instancesRepository;
+  final PreferencesRepository preferencesRepository;
 
   SplashScreenCubit({
     required this.mainRepository,
     required this.instancesRepository,
+    required this.preferencesRepository,
   }) : super(const SplashScreenState.splashScreenInitial());
 
   int pokemonMaxListValue = 0;
@@ -32,6 +37,8 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       pokemonMaxListValue = 0;
       emit(SplashScreenState.splashScreenFailed(errorMsg: "nüx"));
     }
+    await _savePokemonListToPreferences();
+    await _loadPokemonListFromPreferences(); //TODO: Beide privaten Methoden auskommentieren für designen
     emit(SplashScreenState.splashScreenInitialized());
   }
 
@@ -52,5 +59,35 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
         ),
       );
     }
+  }
+
+  Future<void> _savePokemonListToPreferences() async {
+    List<String> pokemonStringList = [];
+    for (final pokemon in mainRepository.pokemonsWithDetails) {
+      pokemonStringList.add(jsonEncode(pokemon.toJson()));
+    }
+    preferencesRepository.savePokemonList(jsonEncode(pokemonStringList));
+  }
+
+  Future<void> _loadPokemonListFromPreferences() async {
+    final String? jsonString = await preferencesRepository.loadPokemonList();
+
+    // Falls null oder leer, leeres Map verwenden
+    final Map<String, dynamic> pokemonMap =
+        jsonString != null && jsonString.isNotEmpty
+        ? jsonDecode(jsonString) as Map<String, dynamic>
+        : {};
+
+    List<PokemonItemData> pokemonList = [];
+
+    for (final p in pokemonMap.entries) {
+      // p.value ist Map<String, dynamic>
+      pokemonList.add(
+        PokemonItemData.fromJson(p.value as Map<String, dynamic>),
+      );
+    }
+
+    // pokemonList enthält jetzt alle geladenen Pokémon
+    print(pokemonList.length);
   }
 }

@@ -24,3 +24,7 @@ Design for the tab bars general and favorites
 textfeld für die suchfunktion dekorieren/stylen!!!!!!
 Design icon for categories
 favoritesCubit need a rework! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!!!!!!!!!!!!!!
+
+15082025
+unterschied @freezed(equal = true und false??? chatgpt frägen
+Lokale datenbank einbinden

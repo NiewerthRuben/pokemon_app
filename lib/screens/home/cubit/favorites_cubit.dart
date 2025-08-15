@@ -21,6 +21,6 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       pokemonRepository.favoritesPokemonList.remove(pokemon);
     }
 
-    emit(FavoritesState.favoritesStateChanged(pokemon: pokemon));
+    emit(FavoritesState.favoritesStateChanged(pokemon: pokemon.copyWith()));
   }
 }

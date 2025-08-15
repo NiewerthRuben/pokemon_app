@@ -24,6 +24,8 @@ class PokemonItemData {
   factory PokemonItemData.fromJson(Map<String, dynamic> json) =>
       _$PokemonItemDataFromJson(json);
 
+  Map<String, dynamic> toJson() => _$PokemonItemDataToJson(this);
+
   PokemonItemData copyWith({
     String? name,
     String? url,

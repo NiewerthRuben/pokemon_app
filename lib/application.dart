@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pokemon_app/screens/splash/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'localization/generated/l10n.dart';
 import 'navigations/e_routes.dart';
@@ -27,3 +28,5 @@ class Application extends StatelessWidget {
     );
   }
 }
+
+//     return MaterialApp(home: RepositoryProvider(create: (context) => PreferencesRepository(preferences: sharedPreferences),child: Home()),);
