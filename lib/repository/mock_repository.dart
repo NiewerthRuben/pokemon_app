@@ -19,7 +19,9 @@ class MockRepository extends ServiceRepository {
   }
 
   @override
-  Future<PokemonListResponseData?> getPokemonList({required int pokemonLimit}) {
+  Future<PokemonListResponseData?> getPokemonList({
+    required int pokemonMaxDownloadCount,
+  }) {
     return Future.delayed(
       const Duration(seconds: 1),
       () => PokemonListResponseData(

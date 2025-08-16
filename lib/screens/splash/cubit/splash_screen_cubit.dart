@@ -27,7 +27,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
 
   Future<void> initializePokemon() async {
     final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
-      pokemonLimit: 2000,
+      pokemonMaxDownloadCount: 2000,
     );
     await _loadPokemonListFromPreferences();
     if (mainRepository.pokemonsWithDetails.length !=
