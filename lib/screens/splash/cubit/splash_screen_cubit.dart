@@ -26,25 +26,28 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   int pokemonMaxListValue = 0;
 
   Future<void> initializePokemon() async {
-    final pokemonList = await _getPokemonList();
-    if (pokemonList != null) {
-      pokemonMaxListValue = pokemonList.results.length;
-      for (PokemonItemData pokemon in pokemonList.results) {
-        await _getPokemonDetails(pokemon.name!);
-      }
-      mainRepository.getCategories();
-    } else {
-      pokemonMaxListValue = 0;
-      emit(SplashScreenState.splashScreenFailed(errorMsg: "nüx"));
+    final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
+      pokemonLimit: 2000,
+    );
+    await _loadPokemonListFromPreferences();
+    if (mainRepository.pokemonsWithDetails.length !=
+            pokemonList?.results.length &&
+        pokemonList != null) {
+      mainRepository.pokemonsWithDetails.clear();
+      await _getPokemonListOnline(pokemonList);
+      await _savePokemonListToPreferences();
     }
-    await _savePokemonListToPreferences();
-    await _loadPokemonListFromPreferences(); //TODO: Beide privaten Methoden auskommentieren für designen
+    mainRepository.getCategories();
     emit(SplashScreenState.splashScreenInitialized());
   }
 
-  Future<PokemonListResponseData?> _getPokemonList() async {
-    final pokemonList = await instancesRepository.serviceAPI.getPokemonList(50);
-    return pokemonList;
+  Future<void> _getPokemonListOnline(
+    PokemonListResponseData pokemonList,
+  ) async {
+    pokemonMaxListValue = pokemonList.results.length;
+    for (PokemonItemData pokemon in pokemonList.results) {
+      await _getPokemonDetails(pokemon.name!);
+    }
   }
 
   Future<void> _getPokemonDetails(String name) async {
@@ -58,6 +61,9 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
               pokemonMaxListValue),
         ),
       );
+    } else {
+      pokemonMaxListValue = 0;
+      emit(SplashScreenState.splashScreenFailed(errorMsg: "nüx"));
     }
   }
 
@@ -69,25 +75,19 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
     preferencesRepository.savePokemonList(jsonEncode(pokemonStringList));
   }
 
-  Future<void> _loadPokemonListFromPreferences() async {
+  Future<List<PokemonItemData>?> _loadPokemonListFromPreferences() async {
     final String? jsonString = await preferencesRepository.loadPokemonList();
 
-    // Falls null oder leer, leeres Map verwenden
-    final Map<String, dynamic> pokemonMap =
-        jsonString != null && jsonString.isNotEmpty
-        ? jsonDecode(jsonString) as Map<String, dynamic>
-        : {};
+    if (jsonString == null || jsonString.isEmpty) return null;
 
-    List<PokemonItemData> pokemonList = [];
+    final List<dynamic> jsonList = jsonDecode(jsonString);
 
-    for (final p in pokemonMap.entries) {
-      // p.value ist Map<String, dynamic>
-      pokemonList.add(
-        PokemonItemData.fromJson(p.value as Map<String, dynamic>),
-      );
-    }
+    final List<PokemonItemData> pokemonList = jsonList
+        .map((jsonString) => PokemonItemData.fromJson(jsonDecode(jsonString)))
+        .toList();
 
-    // pokemonList enthält jetzt alle geladenen Pokémon
-    print(pokemonList.length);
+    mainRepository.pokemonsWithDetails.addAll(pokemonList);
+
+    return pokemonList;
   }
 }
