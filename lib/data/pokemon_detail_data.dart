@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pokemon_app/data/pokemon_stat_data.dart';
 import 'package:pokemon_app/data/pokemon_type_data.dart';
 import 'package:pokemon_app/data/sprites_data.dart';
 
@@ -10,12 +11,14 @@ class PokemonDetailData {
   final String? name;
   final Sprites? sprites;
   final List<PokemonTypeData?>? types;
+  final List<PokemonStatData?>? stats;
 
   PokemonDetailData({
     required this.id,
     required this.name,
     required this.sprites,
     required this.types,
+    required this.stats,
   });
 
   factory PokemonDetailData.fromJson(Map<String, dynamic> json) =>

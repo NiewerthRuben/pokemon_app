@@ -14,7 +14,11 @@ PokemonItemData _$PokemonItemDataFromJson(Map<String, dynamic> json) =>
       firstType: json['firstType'] as String?,
       isFavorite: json['isFavorite'] as bool? ?? false,
       stats: (json['stats'] as List<dynamic>?)
-          ?.map((e) => PokemonStatData.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) => e == null
+                ? null
+                : PokemonStatData.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
     );
 

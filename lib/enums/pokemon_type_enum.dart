@@ -80,7 +80,7 @@ enum PokemonTypeEnum {
       case PokemonTypeEnum.dragon:
         return Colors.indigoAccent;
       case PokemonTypeEnum.dark:
-        return Colors.black;
+        return Colors.grey.shade900;
       case PokemonTypeEnum.steel:
         return Colors.blueGrey;
       case PokemonTypeEnum.fairy:

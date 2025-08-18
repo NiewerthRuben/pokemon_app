@@ -20,6 +20,13 @@ PokemonDetailData _$PokemonDetailDataFromJson(Map<String, dynamic> json) =>
                 : PokemonTypeData.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
+      stats: (json['stats'] as List<dynamic>?)
+          ?.map(
+            (e) => e == null
+                ? null
+                : PokemonStatData.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     );
 
 Map<String, dynamic> _$PokemonDetailDataToJson(PokemonDetailData instance) =>
@@ -28,4 +35,5 @@ Map<String, dynamic> _$PokemonDetailDataToJson(PokemonDetailData instance) =>
       'name': instance.name,
       'sprites': instance.sprites,
       'types': instance.types,
+      'stats': instance.stats,
     };

@@ -18,14 +18,7 @@ mixin _$FavoritesState {
 
 
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FavoritesState);
-}
 
-
-@override
-int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
@@ -189,14 +182,7 @@ class FavoritesInitial implements FavoritesState {
 
 
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FavoritesInitial);
-}
 
-
-@override
-int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
@@ -226,14 +212,7 @@ $FavoritesStateChangedCopyWith<FavoritesStateChanged> get copyWith => _$Favorite
 
 
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FavoritesStateChanged&&(identical(other.pokemon, pokemon) || other.pokemon == pokemon));
-}
 
-
-@override
-int get hashCode => Object.hash(runtimeType,pokemon);
 
 @override
 String toString() {

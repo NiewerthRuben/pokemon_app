@@ -10,7 +10,7 @@ class PokemonItemData {
   final String? imageUrl;
   final String? firstType;
   bool isFavorite;
-  final List<PokemonStatData>? stats;
+  final List<PokemonStatData?>? stats;
 
   PokemonItemData({
     this.name,

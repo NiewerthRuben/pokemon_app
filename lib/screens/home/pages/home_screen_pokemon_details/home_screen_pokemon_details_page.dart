@@ -5,6 +5,7 @@ import 'package:pokemon_app/extensions/color_contrast_extension.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
+import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/widgets/stat_bar_widget/StatBarWidget.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenPokemonDetailsPage extends StatelessWidget {
@@ -50,6 +51,29 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
                   color: backgroundColor.contrastColor,
                 ),
               ),
+              if (pokemon.stats != null && pokemon.stats!.isNotEmpty) ...[
+                const Text(
+                  "Basiswerte:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ListView.builder(
+                  itemBuilder: (context, index) {
+                    final pokemonStat = pokemon.stats![index];
+                    if (pokemonStat != null) {
+                      return StatBarWidget(
+                        name: pokemonStat.stat.name,
+                        value: pokemonStat.baseStat,
+                      );
+                    }
+                  },
+                ),
+              ] else
+                const Center(child: CircularProgressIndicator()),
             ],
           ),
         ),

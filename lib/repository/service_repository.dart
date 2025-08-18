@@ -1,6 +1,7 @@
 import 'package:pokemon_app/data/pokemon_detail_data.dart';
 import 'package:pokemon_app/data/pokemon_item_data.dart';
 import 'package:pokemon_app/data/pokemon_list_response_data.dart';
+import 'package:pokemon_app/data/pokemon_stat_data.dart';
 
 abstract class ServiceRepository {
   Future<PokemonListResponseData?> getPokemonList({
@@ -8,4 +9,6 @@ abstract class ServiceRepository {
   });
 
   Future<PokemonItemData?> getPokemonDetails(String pokemonName);
+
+  Future<PokemonStatData?> getPokemonStats(String pokemonName);
 }
