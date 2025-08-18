@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_app/data/pokemon_item_data.dart';
 import 'package:pokemon_app/enums/pokemon_type_enum.dart';
+import 'package:pokemon_app/extensions/color_contrast_extension.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
@@ -34,16 +35,20 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               Text(
-                pokemon.name!,
-                style: const TextStyle(
+                (pokemon.name != null) ? pokemon.name!.capitalize() : "",
+                style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
+                  color: backgroundColor.contrastColor,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 'Typ: ${pokemon.firstType?.capitalize()}',
-                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: backgroundColor.contrastColor,
+                ),
               ),
             ],
           ),

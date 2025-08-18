@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/data/pokemon_item_data.dart';
+import 'package:pokemon_app/extensions/color_contrast_extension.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/screens/home/cubit/favorites_cubit.dart';
 
@@ -84,7 +85,9 @@ class GridViewItem extends StatelessWidget {
                   IconButton(
                     icon: Icon(
                       pokemon.isFavorite ? Icons.star : Icons.star_border,
-                      color: pokemon.isFavorite ? Colors.yellow : textColor,
+                      color: pokemon.isFavorite
+                          ? Colors.yellow
+                          : backgroundColor.contrastColor,
                     ),
                     onPressed: () {
                       pokemon.isFavorite = !pokemon.isFavorite;
@@ -99,13 +102,16 @@ class GridViewItem extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      color: textColor,
+                      color: backgroundColor.contrastColor,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     "Typ: ${pokemon.firstType?.capitalize()}",
-                    style: TextStyle(fontSize: 14, color: textColor),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: backgroundColor.contrastColor,
+                    ),
                   ),
                   SizedBox(height: 24),
                 ],
