@@ -42,8 +42,6 @@ enum PokemonTypeEnum {
     'fairy': PokemonTypeEnum.fairy,
   };
 
-
-
   static PokemonTypeEnum fromString(String? input) {
     final key = input?.toLowerCase().trim();
     return _mapping[key] ?? PokemonTypeEnum.unknown;
@@ -82,7 +80,7 @@ enum PokemonTypeEnum {
       case PokemonTypeEnum.dragon:
         return Colors.indigoAccent;
       case PokemonTypeEnum.dark:
-        return Colors.black54;
+        return Colors.black;
       case PokemonTypeEnum.steel:
         return Colors.blueGrey;
       case PokemonTypeEnum.fairy:

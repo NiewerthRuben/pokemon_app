@@ -18,6 +18,9 @@ class GridViewItem extends StatelessWidget {
     final favoritesCubit = context.read<FavoritesCubit>();
     final pokemonType = PokemonTypeEnum.fromString(pokemon.firstType);
     final backgroundColor = pokemonType.color;
+
+    final textColor = getContrastingTextColor(backgroundColor);
+
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       builder: (context, state) {
         return GestureDetector(
@@ -77,10 +80,11 @@ class GridViewItem extends StatelessWidget {
                           ),
                         )
                       : Icon(Icons.close),
+
                   IconButton(
                     icon: Icon(
                       pokemon.isFavorite ? Icons.star : Icons.star_border,
-                      color: pokemon.isFavorite ? Colors.yellow : Colors.black,
+                      color: pokemon.isFavorite ? Colors.yellow : textColor,
                     ),
                     onPressed: () {
                       pokemon.isFavorite = !pokemon.isFavorite;
@@ -92,15 +96,16 @@ class GridViewItem extends StatelessWidget {
                     pokemon.name != null
                         ? pokemon.name!.capitalize()
                         : "Nix Name",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
+                      color: textColor,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     "Typ: ${pokemon.firstType?.capitalize()}",
-                    style: const TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 14, color: textColor),
                   ),
                   SizedBox(height: 24),
                 ],
@@ -111,4 +116,9 @@ class GridViewItem extends StatelessWidget {
       },
     );
   }
+}
+
+Color getContrastingTextColor(Color background) {
+  double luminance = background.computeLuminance();
+  return luminance > 0.5 ? Colors.black : Colors.white;
 }
