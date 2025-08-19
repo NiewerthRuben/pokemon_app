@@ -63,6 +63,7 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
               const SizedBox(height: 8),
               Expanded(
                 child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   itemCount: pokemon.stats!.length,
                   itemBuilder: (context, index) {
                     final pokemonStat = pokemon.stats![index];

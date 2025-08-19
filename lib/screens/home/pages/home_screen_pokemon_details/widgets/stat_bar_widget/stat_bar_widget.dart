@@ -55,7 +55,7 @@ class StatBarWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Text(value.toString(), style: TextStyle(color: textColor)),
+          Text("$value/$maxStat", style: TextStyle(color: textColor)),
         ],
       ),
     );

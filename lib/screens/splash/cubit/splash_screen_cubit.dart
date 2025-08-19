@@ -35,7 +35,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
     }
 
     final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
-      pokemonMaxDownloadCount: 200,
+      pokemonMaxDownloadCount: 2000,
     );
     if (pokemonList == null) return;
 
@@ -85,7 +85,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
     final String? storedJsonString = await preferencesRepository
         .loadPokemonList();
     if (storedJsonString == null) return [];
- 
+
     final List<dynamic> jsonList = jsonDecode(storedJsonString);
 
     return jsonList
