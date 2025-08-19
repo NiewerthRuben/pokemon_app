@@ -5,7 +5,7 @@ import 'package:pokemon_app/extensions/color_contrast_extension.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
-import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/widgets/stat_bar_widget/StatBarWidget.dart';
+import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/widgets/stat_bar_widget/stat_bar_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenPokemonDetailsPage extends StatelessWidget {
@@ -22,60 +22,63 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
       },
       child: Container(
         color: backgroundColor,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              (pokemon.imageUrl != null)
-                  ? Image.network(
-                      pokemon.imageUrl!,
-                      height: 200,
-                      fit: BoxFit.contain,
-                    )
-                  : Icon(Icons.close),
-              const SizedBox(height: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            (pokemon.imageUrl != null)
+                ? Image.network(
+                    pokemon.imageUrl!,
+                    height: 200,
+                    fit: BoxFit.contain,
+                  )
+                : Icon(Icons.close),
+            const SizedBox(height: 20),
 
-              Text(
-                (pokemon.name != null) ? pokemon.name!.capitalize() : "",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: backgroundColor.contrastColor,
-                ),
+            Text(
+              (pokemon.name != null) ? pokemon.name!.capitalize() : "",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: backgroundColor.contrastColor,
               ),
-              const SizedBox(height: 10),
-              Text(
-                'Typ: ${pokemon.firstType?.capitalize()}',
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Typ: ${pokemon.firstType?.capitalize()}',
+              style: TextStyle(
+                fontSize: 18,
+                color: backgroundColor.contrastColor,
+              ),
+            ),
+            if (pokemon.stats != null && pokemon.stats!.isNotEmpty) ...[
+              const Text(
+                "Basiswerte:",
                 style: TextStyle(
                   fontSize: 18,
-                  color: backgroundColor.contrastColor,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
-              if (pokemon.stats != null && pokemon.stats!.isNotEmpty) ...[
-                const Text(
-                  "Basiswerte:",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                ListView.builder(
+              const SizedBox(height: 8),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: pokemon.stats!.length,
                   itemBuilder: (context, index) {
                     final pokemonStat = pokemon.stats![index];
-                    if (pokemonStat != null) {
-                      return StatBarWidget(
-                        name: pokemonStat.stat.name,
-                        value: pokemonStat.baseStat,
-                      );
-                    }
+                    return StatBarWidget(
+                      name: (pokemonStat?.stat.name != null)
+                          ? pokemonStat!.stat.name
+                          : "",
+                      value: (pokemonStat?.baseStat != null)
+                          ? pokemonStat!.baseStat
+                          : 0,
+                    );
                   },
                 ),
-              ] else
-                const Center(child: CircularProgressIndicator()),
-            ],
-          ),
+              ),
+            ] else
+              const Center(child: CircularProgressIndicator()),
+          ],
         ),
       ),
     );

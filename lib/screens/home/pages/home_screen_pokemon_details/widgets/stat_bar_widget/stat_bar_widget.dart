@@ -4,8 +4,14 @@ import 'package:pokemon_app/extensions/string_casing_extension.dart';
 class StatBarWidget extends StatelessWidget {
   final String name;
   final int value;
+  final Color? color;
 
-  const StatBarWidget({super.key, required this.name, required this.value});
+  const StatBarWidget({
+    super.key,
+    required this.name,
+    required this.value,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {

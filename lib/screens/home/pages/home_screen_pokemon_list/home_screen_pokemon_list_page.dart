@@ -79,38 +79,22 @@ class HomeScreenPokemonListPage extends StatelessWidget {
                         ),
                       ),
                       TabBar(
-                        tabs: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.red, width: 2),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text("General"),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.red, width: 2),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text("Favorites"),
+                        indicator: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        indicatorPadding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        labelColor: Colors.blue,
+                        unselectedLabelColor: Colors.grey,
+                        tabs: const [
+                          Tab(icon: Icon(Icons.list_alt), text: "General"),
+                          Tab(
+                            icon: Icon(Icons.favorite_border),
+                            text: "Favorites",
                           ),
                         ],
-                        indicatorColor: Colors.transparent,
-                        labelColor: Colors.blue,
-                        unselectedLabelColor: Colors.red,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                        unselectedLabelStyle: const TextStyle(fontSize: 14),
                       ),
                     ],
                   );

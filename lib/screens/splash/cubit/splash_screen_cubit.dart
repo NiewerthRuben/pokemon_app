@@ -26,24 +26,24 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   int pokemonMaxListValue = 0;
 
   Future<void> initializePokemon() async {
+    final storedList = await _loadPokemonListFromPreferences();
+    if (storedList.isNotEmpty) {
+      mainRepository.pokemonsWithDetails = List.of(storedList);
+      mainRepository.getCategories();
+      emit(SplashScreenState.splashScreenInitialized());
+      return;
+    }
+
     final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
-      pokemonMaxDownloadCount: 20,
+      pokemonMaxDownloadCount: 200,
     );
-    await _loadPokemonListFromPreferences();
     if (pokemonList == null) return;
 
-    if (mainRepository.pokemonsWithDetails.length >= //TODO: > replace with <
-        pokemonList.results.length) {
-      mainRepository.pokemonsWithDetails.clear();
-
-      /*      try {
-        await _savePokemonListToPreferences();
-      } catch (e) {
-        print(e.toString());
-      }*/
-    }
     await _getPokemonListOnline(pokemonList);
     mainRepository.getCategories();
+
+    await _savePokemonListToPreferences();
+
     emit(SplashScreenState.splashScreenInitialized());
   }
 
@@ -74,26 +74,23 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   }
 
   Future<void> _savePokemonListToPreferences() async {
-    List<String> pokemonStringList = [];
-    for (final pokemon in mainRepository.pokemonsWithDetails) {
-      pokemonStringList.add(jsonEncode(pokemon.toJson()));
-    }
-    preferencesRepository.savePokemonList(jsonEncode(pokemonStringList));
-  }
-
-  Future<List<PokemonItemData>?> _loadPokemonListFromPreferences() async {
-    final String? jsonString = await preferencesRepository.loadPokemonList();
-
-    if (jsonString == null || jsonString.isEmpty) return null;
-
-    final List<dynamic> jsonList = jsonDecode(jsonString);
-
-    final List<PokemonItemData> pokemonList = jsonList
-        .map((jsonString) => PokemonItemData.fromJson(jsonDecode(jsonString)))
+    final pokemonJsonList = mainRepository.pokemonsWithDetails
+        .map((pokemon) => pokemon.toJson())
         .toList();
 
-    mainRepository.pokemonsWithDetails.addAll(pokemonList);
+    preferencesRepository.savePokemonList(jsonEncode(pokemonJsonList));
+  }
 
-    return pokemonList;
+  Future<List<PokemonItemData>> _loadPokemonListFromPreferences() async {
+    final String? storedJsonString = await preferencesRepository
+        .loadPokemonList();
+    if (storedJsonString == null) return [];
+ 
+    final List<dynamic> jsonList = jsonDecode(storedJsonString);
+
+    return jsonList
+        .cast<Map<String, dynamic>>()
+        .map((e) => PokemonItemData.fromJson(e))
+        .toList();
   }
 }

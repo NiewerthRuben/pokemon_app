@@ -17,8 +17,7 @@ class PokemonStatData {
   factory PokemonStatData.fromJson(Map<String, dynamic> json) =>
       _$PokemonStatDataFromJson(json);
 
-  Map<String, dynamic> toJson() =>
-      _$PokemonStatDataToJson(json as PokemonStatData);
+  Map<String, dynamic> toJson() => _$PokemonStatDataToJson(this);
 }
 
 @JsonSerializable()
@@ -30,5 +29,5 @@ class StatInfo {
   factory StatInfo.fromJson(Map<String, dynamic> json) =>
       _$StatInfoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$StatInfoToJson(json as StatInfo);
+  Map<String, dynamic> toJson() => _$StatInfoToJson(this);
 }
