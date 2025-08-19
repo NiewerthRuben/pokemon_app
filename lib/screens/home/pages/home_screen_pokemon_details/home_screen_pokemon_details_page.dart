@@ -16,6 +16,7 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
     final pokemon = context.read<MainRepository>().selectedPokemon;
     final pokemonType = pokemon.firstType;
     final backgroundColor = PokemonTypeEnum.fromString(pokemonType).color;
+
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         context.read<HomeScreenCubit>().goToListPage();
@@ -51,12 +52,12 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
               ),
             ),
             if (pokemon.stats != null && pokemon.stats!.isNotEmpty) ...[
-              const Text(
+              Text(
                 "Basiswerte:",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: backgroundColor.contrastColor,
                 ),
               ),
               const SizedBox(height: 8),
@@ -72,6 +73,10 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
                       value: (pokemonStat?.baseStat != null)
                           ? pokemonStat!.baseStat
                           : 0,
+                      textColor: backgroundColor.contrastColor,
+                      barColor: (pokemon.firstType == "water")
+                          ? Colors.black
+                          : Colors.blue,
                     );
                   },
                 ),
