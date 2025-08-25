@@ -38,10 +38,7 @@ abstract class ApiService {
     // Add logging interceptor (optional)
     if (enableLogging) {
       dio.interceptors.add(
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
+        LogInterceptor(requestBody: true, responseBody: true),
       );
     }
 
@@ -77,7 +74,5 @@ abstract class ApiService {
   /// Fetches detailed data for a single Pokémon by its name
   /// Example: getPokemonDetail("pikachu")
   @GET('pokemon/{name}')
-  Future<PokemonDetailData> getPokemonDetail(
-      @Path('name') String name,
-      );
+  Future<PokemonDetailData> getPokemonDetail(@Path('name') String name);
 }
