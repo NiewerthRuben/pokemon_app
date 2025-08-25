@@ -12,6 +12,7 @@ class HomeScreenGeneralTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
+        key: const PageStorageKey<String>('pokemonGeneralGrid'),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 8,
