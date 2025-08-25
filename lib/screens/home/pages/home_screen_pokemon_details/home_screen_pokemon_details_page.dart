@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/data/pokemon_item_data.dart';
 import 'package:pokemon_app/enums/pokemon_type_enum.dart';
 import 'package:pokemon_app/extensions/color_contrast_extension.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
 import 'package:pokemon_app/repository/main_repository.dart';
+import 'package:pokemon_app/screens/home/cubit/favorites_cubit.dart';
 import 'package:pokemon_app/screens/home/cubit/home_screen_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/widgets/stat_bar_widget/stat_bar_widget.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +18,7 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
     final pokemon = context.read<MainRepository>().selectedPokemon;
     final pokemonType = pokemon.firstType;
     final backgroundColor = PokemonTypeEnum.fromString(pokemonType).color;
+    final favoritesCubit = context.read<FavoritesCubit>();
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
@@ -23,68 +26,91 @@ class HomeScreenPokemonDetailsPage extends StatelessWidget {
       },
       child: Container(
         color: backgroundColor,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            (pokemon.imageUrl != null)
-                ? Image.network(
-                    pokemon.imageUrl!,
-                    height: 200,
-                    fit: BoxFit.contain,
-                  )
-                : Icon(Icons.close),
-            const SizedBox(height: 20),
+        child: BlocBuilder<FavoritesCubit, FavoritesState>(
+          builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                (pokemon.imageUrl != null)
+                    ? Image.network(
+                        pokemon.imageUrl!,
+                        height: 200,
+                        fit: BoxFit.contain,
+                      )
+                    : Icon(Icons.close),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      (pokemon.name != null) ? pokemon.name!.capitalize() : "",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: backgroundColor.contrastColor,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
 
-            Text(
-              (pokemon.name != null) ? pokemon.name!.capitalize() : "",
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: backgroundColor.contrastColor,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Typ: ${pokemon.firstType?.capitalize()}',
-              style: TextStyle(
-                fontSize: 18,
-                color: backgroundColor.contrastColor,
-              ),
-            ),
-            if (pokemon.stats != null && pokemon.stats!.isNotEmpty) ...[
-              Text(
-                "Basiswerte:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: backgroundColor.contrastColor,
+                    IconButton(
+                      icon: Icon(
+                        pokemon.isFavorite ? Icons.star : Icons.star_border,
+                        color: pokemon.isFavorite
+                            ? Colors.yellow
+                            : backgroundColor.contrastColor,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        pokemon.isFavorite = !pokemon.isFavorite;
+                        favoritesCubit.changePokemonFavoriteList(pokemon);
+                      },
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 8),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  itemCount: pokemon.stats!.length,
-                  itemBuilder: (context, index) {
-                    final pokemonStat = pokemon.stats![index];
-                    return StatBarWidget(
-                      name: (pokemonStat?.stat.name != null)
-                          ? pokemonStat!.stat.name
-                          : "",
-                      value: (pokemonStat?.baseStat != null)
-                          ? pokemonStat!.baseStat
-                          : 0,
-                      textColor: backgroundColor.contrastColor,
-                      barColor: (pokemon.firstType == "water")
-                          ? Colors.black
-                          : Colors.blue,
-                    );
-                  },
+                const SizedBox(height: 10),
+                Text(
+                  'Typ: ${pokemon.firstType?.capitalize()}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: backgroundColor.contrastColor,
+                  ),
                 ),
-              ),
-            ] else
-              const Center(child: CircularProgressIndicator()),
-          ],
+                if (pokemon.stats != null && pokemon.stats!.isNotEmpty) ...[
+                  Text(
+                    "Basiswerte:",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: backgroundColor.contrastColor,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      itemCount: pokemon.stats!.length,
+                      itemBuilder: (context, index) {
+                        final pokemonStat = pokemon.stats![index];
+                        return StatBarWidget(
+                          name: (pokemonStat?.stat.name != null)
+                              ? pokemonStat!.stat.name
+                              : "",
+                          value: (pokemonStat?.baseStat != null)
+                              ? pokemonStat!.baseStat
+                              : 0,
+                          textColor: backgroundColor.contrastColor,
+                          barColor: (pokemon.firstType == "water")
+                              ? Colors.black
+                              : Colors.blue,
+                        );
+                      },
+                    ),
+                  ),
+                ] else
+                  const Center(child: CircularProgressIndicator()),
+              ],
+            );
+          },
         ),
       ),
     );
