@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'evolution_chain_link.dart';
+import 'evolution_chain_link_data.dart';
 
 part 'pokemon_species_data.g.dart';
 
@@ -10,7 +10,7 @@ class PokemonSpeciesData {
   final String name;
 
   @JsonKey(name: 'evolution_chain')
-  final EvolutionChainLink evolutionChain;
+  final EvolutionChainLinkData evolutionChain;
 
   PokemonSpeciesData({
     required this.id,

@@ -10,7 +10,7 @@ PokemonSpeciesData _$PokemonSpeciesDataFromJson(Map<String, dynamic> json) =>
     PokemonSpeciesData(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      evolutionChain: EvolutionChainLink.fromJson(
+      evolutionChain: EvolutionChainLinkData.fromJson(
         json['evolution_chain'] as Map<String, dynamic>,
       ),
     );

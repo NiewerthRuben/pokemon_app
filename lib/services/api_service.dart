@@ -2,8 +2,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart'; // For IOHttpClientAdapter in Dio v5
 import 'package:retrofit/retrofit.dart';
+import '../data/evolution_chain_data.dart';
+import '../data/evolution_chain_link_data.dart';
 import '../data/pokemon_detail_data.dart';
 import '../data/pokemon_list_response_data.dart';
+import '../data/pokemon_species_data.dart';
 
 part 'api_service.g.dart';
 
@@ -75,4 +78,10 @@ abstract class ApiService {
   /// Example: getPokemonDetail("pikachu")
   @GET('pokemon/{name}')
   Future<PokemonDetailData> getPokemonDetail(@Path('name') String name);
+
+  @GET('pokemon-species/{name}')
+  Future<PokemonSpeciesData> getPokemonSpecies(@Path('name') String name);
+
+  @GET('evolution-chain/{id}')
+  Future<EvolutionChainData> getEvolutionChain(@Path('id') int id);
 }
