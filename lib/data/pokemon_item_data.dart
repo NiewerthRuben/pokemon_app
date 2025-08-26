@@ -1,5 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pokemon_app/data/pokemon_species_data.dart';
 import 'package:pokemon_app/data/pokemon_stat_data.dart';
+
+import 'evolution_chain_data.dart';
 
 part 'pokemon_item_data.g.dart';
 
@@ -12,6 +15,9 @@ class PokemonItemData {
   bool isFavorite;
   final List<PokemonStatData?>? stats;
 
+  final PokemonSpeciesData? species;
+  final EvolutionChainData? evolutionChain;
+
   PokemonItemData({
     this.name,
     this.url,
@@ -19,6 +25,8 @@ class PokemonItemData {
     this.firstType,
     this.isFavorite = false,
     this.stats,
+    this.species,
+    this.evolutionChain,
   });
 
   factory PokemonItemData.fromJson(Map<String, dynamic> json) =>
@@ -33,6 +41,8 @@ class PokemonItemData {
     String? firstType,
     bool? isFavorite,
     List<PokemonStatData>? stats,
+    PokemonSpeciesData? species,
+    EvolutionChainData? evolutionChain,
   }) {
     return PokemonItemData(
       name: name ?? this.name,
@@ -41,6 +51,8 @@ class PokemonItemData {
       firstType: firstType ?? this.firstType,
       isFavorite: isFavorite ?? this.isFavorite,
       stats: stats,
+      species: species ?? this.species,
+      evolutionChain: evolutionChain ?? this.evolutionChain,
     );
   }
 }
