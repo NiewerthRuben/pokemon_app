@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../data/pokemon_item_data.dart';
+import '../../../repository/main_repository.dart';
 
 part 'home_screen_state.dart';
 

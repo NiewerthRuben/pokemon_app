@@ -56,4 +56,12 @@ class MockRepository extends ServiceRepository {
     // TODO: implement getPokemonStats
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<PokemonItemData>> getEvolutionChainForPokemon(
+    String pokemonName,
+  ) {
+    // TODO: implement getEvolutionChainForPokemon
+    throw UnimplementedError();
+  }
 }

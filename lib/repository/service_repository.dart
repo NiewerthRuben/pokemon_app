@@ -11,4 +11,6 @@ abstract class ServiceRepository {
   Future<PokemonItemData?> getPokemonDetails(String pokemonName);
 
   Future<PokemonStatData?> getPokemonStats(String pokemonName);
+
+  Future<List<PokemonItemData>> getEvolutionChainForPokemon(String pokemonName);
 }

@@ -20,6 +20,16 @@ PokemonItemData _$PokemonItemDataFromJson(Map<String, dynamic> json) =>
                 : PokemonStatData.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
+      species: json['species'] == null
+          ? null
+          : PokemonSpeciesData.fromJson(
+              json['species'] as Map<String, dynamic>,
+            ),
+      evolutionChain: json['evolutionChain'] == null
+          ? null
+          : EvolutionChainData.fromJson(
+              json['evolutionChain'] as Map<String, dynamic>,
+            ),
     );
 
 Map<String, dynamic> _$PokemonItemDataToJson(PokemonItemData instance) =>
@@ -30,4 +40,6 @@ Map<String, dynamic> _$PokemonItemDataToJson(PokemonItemData instance) =>
       'firstType': instance.firstType,
       'isFavorite': instance.isFavorite,
       'stats': instance.stats,
+      'species': instance.species,
+      'evolutionChain': instance.evolutionChain,
     };
