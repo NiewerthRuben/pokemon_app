@@ -30,6 +30,22 @@ class SplashScreen extends StatelessWidget {
               if (state is SplashScreenInitialized) {
                 ERoute.HOME.pushReplacement(context);
               }
+              if (state is SplashScreenFailed) {
+                showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text("Error"),
+                    content: Text(state.errorMsg),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text("ok"),
+                      ),
+                    ],
+                  ), // TODO: add hardcoded text in localizations!
+                );
+              }
             },
             child: Scaffold(body: SplashScreenContent()),
           );

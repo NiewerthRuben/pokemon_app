@@ -26,25 +26,29 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   int pokemonMaxListValue = 0;
 
   Future<void> initializePokemon() async {
-    final storedList = await _loadPokemonListFromPreferences();
-    if (storedList.isNotEmpty) {
-      mainRepository.pokemonsWithDetails = List.of(storedList);
+    try {
+      final storedList = await _loadPokemonListFromPreferences();
+      if (storedList.isNotEmpty) {
+        mainRepository.pokemonsWithDetails = List.of(storedList);
+        mainRepository.getCategories();
+        emit(SplashScreenState.splashScreenInitialized());
+        return;
+      }
+
+      final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
+        pokemonMaxDownloadCount: 2000,
+      );
+      if (pokemonList == null) return;
+
+      await _getPokemonListOnline(pokemonList);
       mainRepository.getCategories();
+
+      await _savePokemonListToPreferences();
+
       emit(SplashScreenState.splashScreenInitialized());
-      return;
+    } catch (e) {
+      emit(SplashScreenState.splashScreenFailed(errorMsg: e.toString()));
     }
-
-    final pokemonList = await instancesRepository.serviceAPI.getPokemonList(
-      pokemonMaxDownloadCount: 2000,
-    );
-    if (pokemonList == null) return;
-
-    await _getPokemonListOnline(pokemonList);
-    mainRepository.getCategories();
-
-    await _savePokemonListToPreferences();
-
-    emit(SplashScreenState.splashScreenInitialized());
   }
 
   Future<void> _getPokemonListOnline(
