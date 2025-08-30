@@ -28,3 +28,7 @@ favoritesCubit need a rework! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!!!!!!
 15082025
 unterschied @freezed(equal = true und false??? chatgpt frägen
 Lokale datenbank einbinden
+
+
+30082025
+Keyboard ausblenden bei detailsscreen
