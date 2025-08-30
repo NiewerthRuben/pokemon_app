@@ -18,7 +18,7 @@ class EvolutionCubit extends Cubit<EvolutionState> {
     required this.instancesRepository,
     required this.mainRepository,
     required this.pokemonName,
-  }) : super(const EvolutionState.initial()) {
+  }) : super(const EvolutionState.evolutionInitial()) {
     loadEvolution();
   }
 
@@ -32,11 +32,11 @@ class EvolutionCubit extends Cubit<EvolutionState> {
 
     final cached = mainRepository.getCachedEvolution(pokemonName);
     if (cached != null && cached.isNotEmpty) {
-      emit(EvolutionState.loaded(stages: cached));
+      emit(EvolutionState.evolutionLoaded(stages: cached));
       return;
     }
 
-    emit(const EvolutionState.loading());
+    emit(const EvolutionState.evolutionLoading());
 
     try {
       final stages = await instancesRepository.serviceAPI
@@ -46,9 +46,9 @@ class EvolutionCubit extends Cubit<EvolutionState> {
 
       mainRepository.cacheEvolution(pokemonName, safeStages);
 
-      emit(EvolutionState.loaded(stages: safeStages));
+      emit(EvolutionState.evolutionLoaded(stages: safeStages));
     } catch (e, st) {
-      emit(EvolutionState.failure(message: e.toString()));
+      emit(EvolutionState.evoltionFailure(message: e.toString()));
     }
   }
 }

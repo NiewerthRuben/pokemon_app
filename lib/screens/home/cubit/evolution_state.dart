@@ -2,12 +2,14 @@ part of 'evolution_cubit.dart';
 
 @freezed
 class EvolutionState with _$EvolutionState {
-  const factory EvolutionState.initial() = _Initial;
+  const factory EvolutionState.evolutionInitial() = EvolitionInitial;
 
-  const factory EvolutionState.loading() = _Loading;
+  const factory EvolutionState.evolutionLoading() = EvolutionLoading;
 
-  const factory EvolutionState.loaded({required List<PokemonItemData> stages}) =
-      _Loaded;
+  const factory EvolutionState.evolutionLoaded({
+    required List<PokemonItemData> stages,
+  }) = EvolutionLoaded;
 
-  const factory EvolutionState.failure({required String message}) = _Failure;
+  const factory EvolutionState.evoltionFailure({required String message}) =
+      EvolutionFailure;
 }

@@ -7,7 +7,8 @@ import '../screens/splash/splash_screen.dart';
 enum ERoute {
   MAIN('/'),
   SPLASH('/splash_screen'),
-  HOME('/home_screen');
+  HOME('/home_screen'),
+  DETAILS('/home_details');
 
   final String route;
 
@@ -18,6 +19,7 @@ enum ERoute {
       ERoute.MAIN => const SplashScreen(),
       ERoute.SPLASH => const SplashScreen(),
       ERoute.HOME => const HomeScreen(),
+      ERoute.DETAILS => const HomeScreenPokemonDetailsPage(),
     };
   }
 

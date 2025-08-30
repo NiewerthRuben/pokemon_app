@@ -24,6 +24,7 @@ class Application extends StatelessWidget {
         ERoute.MAIN.route: (context) => ERoute.SPLASH.screen,
         ERoute.SPLASH.route: (context) => ERoute.SPLASH.screen,
         ERoute.HOME.route: (context) => ERoute.HOME.screen,
+        ERoute.DETAILS.route: (context) => ERoute.DETAILS.screen,
       },
     );
   }
