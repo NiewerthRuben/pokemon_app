@@ -12,12 +12,20 @@ part 'evolution_cubit.freezed.dart';
 class EvolutionCubit extends Cubit<EvolutionState> {
   final InstancesRepository instancesRepository;
   final MainRepository mainRepository;
-  final String pokemonName;
+
+  EvolutionCubit({
+    required this.instancesRepository,
+    required this.mainRepository,
+  }) : super(const EvolutionState.evolutionInitial());
+
+  bool _processing = false;
 
   Future<void> loadEvolution() async {
     if (_processing) return;
     _processing = true;
-    final cached = mainRepository.getCachedEvolution(pokemonName);
+    final cached = mainRepository.getCachedEvolution(
+      mainRepository.selectedPokemon.name ?? "",
+    );
     if (cached != null && cached.isNotEmpty) {
       emit(EvolutionState.evolutionLoaded(stages: cached));
       return;
@@ -27,11 +35,16 @@ class EvolutionCubit extends Cubit<EvolutionState> {
 
     try {
       final stages = await instancesRepository.serviceAPI
-          .getEvolutionChainForPokemon(pokemonName);
+          .getEvolutionChainForPokemon(
+            mainRepository.selectedPokemon.name ?? "",
+          );
 
       final safeStages = stages ?? <PokemonItemData>[];
 
-      mainRepository.cacheEvolution(pokemonName, safeStages);
+      mainRepository.cacheEvolution(
+        mainRepository.selectedPokemon.name ?? "",
+        safeStages,
+      );
 
       _processing = false;
       emit(EvolutionState.evolutionLoaded(stages: safeStages));
@@ -40,14 +53,4 @@ class EvolutionCubit extends Cubit<EvolutionState> {
       emit(EvolutionState.evoltionFailure(message: e.toString()));
     }
   }
-
-  EvolutionCubit({
-    required this.instancesRepository,
-    required this.mainRepository,
-    required this.pokemonName,
-  }) : super(const EvolutionState.evolutionInitial()) {
-    loadEvolution();
-  }
-
-  bool _processing = false;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/extensions/color_contrast_extension.dart';
 import 'package:pokemon_app/extensions/string_casing_extension.dart';
+import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/cubit/pokemon_details_cubit.dart';
 import 'package:pokemon_app/screens/home/pages/home_screen_pokemon_details/widgets/stat_bar_widget/stat_bar_widget.dart';
 
 import '../../../../../enums/pokemon_type_enum.dart';
@@ -109,47 +110,31 @@ class PokemonDetailsPageContent extends StatelessWidget {
               height: 140,
               child: BlocBuilder<EvolutionCubit, EvolutionState>(
                 builder: (context, state) {
-                  return state.when(
-                    initial: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    failure: (message) => Center(
-                      child: Text(
-                        "Fehler beim Laden: $message",
-                        style: TextStyle(color: backgroundColor.contrastColor),
-                      ),
-                    ),
-                    loaded: (stages) {
-                      if (stages.isEmpty) {
-                        return Center(
-                          child: Text(
-                            "Keine Entwicklung gefunden",
-                            style: TextStyle(
-                              color: backgroundColor.contrastColor,
-                            ),
+                  if (state is EvolutionLoaded) {
+                    if (state.stages.isEmpty) {
+                      return Center(
+                        child: Text(
+                          "Keine Entwicklung gefunden",
+                          style: TextStyle(
+                            color: backgroundColor.contrastColor,
                           ),
-                        );
-                      }
-
+                        ),
+                      );
+                    } else {
                       return ListView.separated(
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.symmetric(horizontal: 8),
-                        itemCount: stages.length,
+                        itemCount: state.stages.length,
                         separatorBuilder: (_, __) => const SizedBox(width: 12),
                         itemBuilder: (context, idx) {
-                          final stage = stages[idx];
+                          final stage = state.stages[idx];
 
                           return Column(
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  context
-                                          .read<MainRepository>()
-                                          .selectedPokemon =
-                                      stage;
-
-                                  ERoute.DETAILS.push(context);
+                                  mainRepo.selectedPokemon = stage;
+                                  context.read<PokemonDetailsCubit>().initial();
                                 },
                                 child: CircleAvatar(
                                   radius: 44,
@@ -177,8 +162,15 @@ class PokemonDetailsPageContent extends StatelessWidget {
                           );
                         },
                       );
-                    },
-                  );
+                    }
+                  } else if (state is EvolutionFailure) {
+                    return Text(
+                      "Fehler beim Laden: ${state.message}",
+                      style: TextStyle(color: backgroundColor.contrastColor),
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
                 },
               ),
             ),

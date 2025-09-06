@@ -55,14 +55,14 @@ extension EvolutionStatePatterns on EvolutionState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( EvolitionInitial value)?  initial,TResult Function( EvolutionLoading value)?  loading,TResult Function( EvolutionLoaded value)?  loaded,TResult Function( EvolutionFailure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( EvolitionInitial value)?  evolutionInitial,TResult Function( EvolutionLoading value)?  evolutionLoading,TResult Function( EvolutionLoaded value)?  evolutionLoaded,TResult Function( EvolutionFailure value)?  evoltionFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case EvolitionInitial() when initial != null:
-return initial(_that);case EvolutionLoading() when loading != null:
-return loading(_that);case EvolutionLoaded() when loaded != null:
-return loaded(_that);case EvolutionFailure() when failure != null:
-return failure(_that);case _:
+case EvolitionInitial() when evolutionInitial != null:
+return evolutionInitial(_that);case EvolutionLoading() when evolutionLoading != null:
+return evolutionLoading(_that);case EvolutionLoaded() when evolutionLoaded != null:
+return evolutionLoaded(_that);case EvolutionFailure() when evoltionFailure != null:
+return evoltionFailure(_that);case _:
   return orElse();
 
 }
@@ -80,14 +80,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( EvolitionInitial value)  initial,required TResult Function( EvolutionLoading value)  loading,required TResult Function( EvolutionLoaded value)  loaded,required TResult Function( EvolutionFailure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( EvolitionInitial value)  evolutionInitial,required TResult Function( EvolutionLoading value)  evolutionLoading,required TResult Function( EvolutionLoaded value)  evolutionLoaded,required TResult Function( EvolutionFailure value)  evoltionFailure,}){
 final _that = this;
 switch (_that) {
 case EvolitionInitial():
-return initial(_that);case EvolutionLoading():
-return loading(_that);case EvolutionLoaded():
-return loaded(_that);case EvolutionFailure():
-return failure(_that);case _:
+return evolutionInitial(_that);case EvolutionLoading():
+return evolutionLoading(_that);case EvolutionLoaded():
+return evolutionLoaded(_that);case EvolutionFailure():
+return evoltionFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +104,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( EvolitionInitial value)?  initial,TResult? Function( EvolutionLoading value)?  loading,TResult? Function( EvolutionLoaded value)?  loaded,TResult? Function( EvolutionFailure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( EvolitionInitial value)?  evolutionInitial,TResult? Function( EvolutionLoading value)?  evolutionLoading,TResult? Function( EvolutionLoaded value)?  evolutionLoaded,TResult? Function( EvolutionFailure value)?  evoltionFailure,}){
 final _that = this;
 switch (_that) {
-case EvolitionInitial() when initial != null:
-return initial(_that);case EvolutionLoading() when loading != null:
-return loading(_that);case EvolutionLoaded() when loaded != null:
-return loaded(_that);case EvolutionFailure() when failure != null:
-return failure(_that);case _:
+case EvolitionInitial() when evolutionInitial != null:
+return evolutionInitial(_that);case EvolutionLoading() when evolutionLoading != null:
+return evolutionLoading(_that);case EvolutionLoaded() when evolutionLoaded != null:
+return evolutionLoaded(_that);case EvolutionFailure() when evoltionFailure != null:
+return evoltionFailure(_that);case _:
   return null;
 
 }
@@ -128,13 +128,13 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<PokemonItemData> stages)?  loaded,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  evolutionInitial,TResult Function()?  evolutionLoading,TResult Function( List<PokemonItemData> stages)?  evolutionLoaded,TResult Function( String message)?  evoltionFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case EvolitionInitial() when initial != null:
-return initial();case EvolutionLoading() when loading != null:
-return loading();case EvolutionLoaded() when loaded != null:
-return loaded(_that.stages);case EvolutionFailure() when failure != null:
-return failure(_that.message);case _:
+case EvolitionInitial() when evolutionInitial != null:
+return evolutionInitial();case EvolutionLoading() when evolutionLoading != null:
+return evolutionLoading();case EvolutionLoaded() when evolutionLoaded != null:
+return evolutionLoaded(_that.stages);case EvolutionFailure() when evoltionFailure != null:
+return evoltionFailure(_that.message);case _:
   return orElse();
 
 }
@@ -152,13 +152,13 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<PokemonItemData> stages)  loaded,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  evolutionInitial,required TResult Function()  evolutionLoading,required TResult Function( List<PokemonItemData> stages)  evolutionLoaded,required TResult Function( String message)  evoltionFailure,}) {final _that = this;
 switch (_that) {
 case EvolitionInitial():
-return initial();case EvolutionLoading():
-return loading();case EvolutionLoaded():
-return loaded(_that.stages);case EvolutionFailure():
-return failure(_that.message);case _:
+return evolutionInitial();case EvolutionLoading():
+return evolutionLoading();case EvolutionLoaded():
+return evolutionLoaded(_that.stages);case EvolutionFailure():
+return evoltionFailure(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +175,13 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<PokemonItemData> stages)?  loaded,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  evolutionInitial,TResult? Function()?  evolutionLoading,TResult? Function( List<PokemonItemData> stages)?  evolutionLoaded,TResult? Function( String message)?  evoltionFailure,}) {final _that = this;
 switch (_that) {
-case EvolitionInitial() when initial != null:
-return initial();case EvolutionLoading() when loading != null:
-return loading();case EvolutionLoaded() when loaded != null:
-return loaded(_that.stages);case EvolutionFailure() when failure != null:
-return failure(_that.message);case _:
+case EvolitionInitial() when evolutionInitial != null:
+return evolutionInitial();case EvolutionLoading() when evolutionLoading != null:
+return evolutionLoading();case EvolutionLoaded() when evolutionLoaded != null:
+return evolutionLoaded(_that.stages);case EvolutionFailure() when evoltionFailure != null:
+return evoltionFailure(_that.message);case _:
   return null;
 
 }
@@ -212,7 +212,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'EvolutionState.initial()';
+  return 'EvolutionState.evolutionInitial()';
 }
 
 
@@ -244,7 +244,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'EvolutionState.loading()';
+  return 'EvolutionState.evolutionLoading()';
 }
 
 
@@ -272,7 +272,7 @@ class EvolutionLoaded implements EvolutionState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LoadedCopyWith<EvolutionLoaded> get copyWith => __$LoadedCopyWithImpl<EvolutionLoaded>(this, _$identity);
+$EvolutionLoadedCopyWith<EvolutionLoaded> get copyWith => _$EvolutionLoadedCopyWithImpl<EvolutionLoaded>(this, _$identity);
 
 
 
@@ -287,15 +287,15 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'EvolutionState.loaded(stages: $stages)';
+  return 'EvolutionState.evolutionLoaded(stages: $stages)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoadedCopyWith<$Res> implements $EvolutionStateCopyWith<$Res> {
-  factory _$LoadedCopyWith(EvolutionLoaded value, $Res Function(EvolutionLoaded) _then) = __$LoadedCopyWithImpl;
+abstract mixin class $EvolutionLoadedCopyWith<$Res> implements $EvolutionStateCopyWith<$Res> {
+  factory $EvolutionLoadedCopyWith(EvolutionLoaded value, $Res Function(EvolutionLoaded) _then) = _$EvolutionLoadedCopyWithImpl;
 @useResult
 $Res call({
  List<PokemonItemData> stages
@@ -306,9 +306,9 @@ $Res call({
 
 }
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res>
-    implements _$LoadedCopyWith<$Res> {
-  __$LoadedCopyWithImpl(this._self, this._then);
+class _$EvolutionLoadedCopyWithImpl<$Res>
+    implements $EvolutionLoadedCopyWith<$Res> {
+  _$EvolutionLoadedCopyWithImpl(this._self, this._then);
 
   final EvolutionLoaded _self;
   final $Res Function(EvolutionLoaded) _then;
@@ -338,7 +338,7 @@ class EvolutionFailure implements EvolutionState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$FailureCopyWith<EvolutionFailure> get copyWith => __$FailureCopyWithImpl<EvolutionFailure>(this, _$identity);
+$EvolutionFailureCopyWith<EvolutionFailure> get copyWith => _$EvolutionFailureCopyWithImpl<EvolutionFailure>(this, _$identity);
 
 
 
@@ -353,15 +353,15 @@ int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'EvolutionState.failure(message: $message)';
+  return 'EvolutionState.evoltionFailure(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res> implements $EvolutionStateCopyWith<$Res> {
-  factory _$FailureCopyWith(EvolutionFailure value, $Res Function(EvolutionFailure) _then) = __$FailureCopyWithImpl;
+abstract mixin class $EvolutionFailureCopyWith<$Res> implements $EvolutionStateCopyWith<$Res> {
+  factory $EvolutionFailureCopyWith(EvolutionFailure value, $Res Function(EvolutionFailure) _then) = _$EvolutionFailureCopyWithImpl;
 @useResult
 $Res call({
  String message
@@ -372,9 +372,9 @@ $Res call({
 
 }
 /// @nodoc
-class __$FailureCopyWithImpl<$Res>
-    implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class _$EvolutionFailureCopyWithImpl<$Res>
+    implements $EvolutionFailureCopyWith<$Res> {
+  _$EvolutionFailureCopyWithImpl(this._self, this._then);
 
   final EvolutionFailure _self;
   final $Res Function(EvolutionFailure) _then;

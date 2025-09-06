@@ -32,3 +32,6 @@ Lokale datenbank einbinden
 
 30082025
 Keyboard ausblenden bei detailsscreen
+stage dummie daten anhand der eigenen listen vor dem anzeigen aktualisieren ( isFavorite ja/nein )
+pokemon im detail screen kenntlich machen für favoriten
+einen eigenen branch für eine datenbank (test local db) ISAR Dependency
